@@ -61,6 +61,5 @@ public class SingIn extends AppCompatActivity {
     private void moveToSignUpActivity(){
         Intent i = new Intent(getApplicationContext(),SignUp.class);
         startActivity(i);
-        setContentView(R.layout.activity_sign_up);
     }
 }
