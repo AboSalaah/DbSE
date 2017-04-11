@@ -10,7 +10,49 @@
     tools:context=".SingIn">
 
     <TextView
+        android:id="@+id/DbSE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Forgotten Password?"
+        android:paddingLeft="120dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/sign_in_button"
+        android:paddingTop="16dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/User_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"/>
+    <EditText
+        android:id="@+id/password"
+        android:layout_below="@+id/User_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/password" />
+    <TextView
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgotten Password?"
+        android:paddingLeft="120dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/sign_in_button"
+        android:paddingTop="16dp"
+        android:textColor="@color/colorPrimary"/>
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
