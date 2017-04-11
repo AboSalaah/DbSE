@@ -16,5 +16,21 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- this define a style for the word create your account in signup form.-->
+    <style name="SignUptextstyle">
+        <item name="android:textSize">35sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@android:color/white</item>
 
+    </style>
+    <style name="edittextsingupstyle">
+        <item name="android:layout_height">@dimen/edittexthieghtsignup</item>
+        <item name="android:layout_width">@dimen/edittextwidthsignup</item>
+        <item name="android:background">@drawable/roundedborder</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:padding">10dp</item>
+
+    </style>
 </resources>

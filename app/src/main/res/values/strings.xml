@@ -4,6 +4,16 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="register1">Create your</string>
+    <string name="register2">account!</string>
+    <!--these strings define hints for edit texts in singup form-->
+    <string name="signupemail">E-mail</string>
+    <string name="signuppassword">Password</string>
+    <string name="singupusername">UserName</string>
+    <!--string for create account button-->
+    <string name="createaccount">Create Account</string>
+    <string name="emptyerror">Should be blank</string>
+    <string name="confirmationcode">Confirmation Code</string>
+
 </resources>

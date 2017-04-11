@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/singuprelativelayout"
+    android:background="@color/dbsecolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,5 +11,57 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ahmedsaleh.dbse.SignUp">
+    <TextView
+        android:id="@+id/register1"
+        style="@style/SignUptextstyle"
+        android:text="@string/register1"
+       />
+    <TextView
+        android:id="@+id/register2"
+        style="@style/SignUptextstyle"
+        android:text="@string/register2"
+        android:layout_below="@id/register1"
+        android:layout_marginBottom="20dp"
+       />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/singuplinearlayout"
+        android:layout_below="@id/register2"
+        android:layout_centerHorizontal="true"
+        >
+        <EditText
+           style="@style/edittextsingupstyle"
+            android:hint="@string/singupusername"
+            android:id="@+id/usernameedittext"
+            />
+        <EditText
+            style="@style/edittextsingupstyle"
+            android:hint="@string/signupemail"
+            android:id="@+id/emailedittext"
+            />
+        <EditText
+            style="@style/edittextsingupstyle"
+            android:hint="@string/signuppassword"
+            android:inputType="textPassword"
+            android:id="@+id/passwordedittext"
+
+           />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createaccount_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/createaccount"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/singuplinearlayout"
+        android:background="@drawable/roundedborder"
+        />
+
 
 </RelativeLayout>
