@@ -11,7 +11,7 @@
        android:textSize="25sp"
        />
     <EditText
-      style="@style/edittextsingupstyle"
+      style="@style/edittext_sign_in_up_style"
         android:inputType="text"
         />
 </LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/singuprelativelayout"
     android:background="@color/dbsecolor"
     android:layout_width="match_parent"
@@ -33,17 +32,17 @@
         android:layout_centerHorizontal="true"
         >
         <EditText
-           style="@style/edittextsingupstyle"
+           style="@style/edittext_sign_in_up_style"
             android:hint="@string/singupusername"
             android:id="@+id/usernameedittext"
             />
         <EditText
-            style="@style/edittextsingupstyle"
+            style="@style/edittext_sign_in_up_style"
             android:hint="@string/signupemail"
             android:id="@+id/emailedittext"
             />
         <EditText
-            style="@style/edittextsingupstyle"
+            style="@style/edittext_sign_in_up_style"
             android:hint="@string/signuppassword"
             android:inputType="textPassword"
             android:id="@+id/passwordedittext"

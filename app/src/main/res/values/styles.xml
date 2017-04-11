@@ -25,7 +25,7 @@
         <item name="android:textColor">@android:color/white</item>
 
     </style>
-    <style name="edittextsingupstyle">
+    <style name="edittext_sign_in_up_style">
         <item name="android:layout_height">@dimen/edittexthieghtsignup</item>
         <item name="android:layout_width">@dimen/edittextwidthsignup</item>
         <item name="android:background">@drawable/roundedborder</item>

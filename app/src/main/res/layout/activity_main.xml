@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/singuprelativelayout"
+    android:background="@color/dbsecolor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -10,49 +12,47 @@
     tools:context=".SingIn">
 
     <TextView
-        android:id="@+id/DbSE"
+        android:id="@+id/SignInTitleText"
+        style="@style/SignUptextstyle"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_in_title"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgotten Password?"
-        android:paddingLeft="120dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/sign_in_button"
-        android:paddingTop="16dp"
-        android:textColor="@color/colorPrimary"/>
-
+        android:orientation="vertical"
+        android:id="@+id/signinlinearlayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/SignInTitleText"
+        >
     <EditText
-        android:id="@+id/User_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="E-mail"/>
+        style="@style/edittext_sign_in_up_style"
+        android:id="@+id/signIn_user_email"
+        android:hint="@string/sign_in_email_hint"/>
     <EditText
-        android:id="@+id/password"
-        android:layout_below="@+id/User_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"/>
+        style="@style/edittext_sign_in_up_style"
+        android:id="@+id/signIn_password"
+        android:inputType="textPassword"
+        android:hint="@string/sign_in_password_hint"/>
+    </LinearLayout>
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:background="@color/colorPrimary"
-        android:layout_below="@+id/password" />
+        android:text="@string/sign_in"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signinlinearlayout"
+        android:background="@drawable/roundedborder"
+        />
     <TextView
         android:id="@+id/forget_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgotten Password?"
-        android:paddingLeft="120dp"
+        android:text="@string/froget_pass"
         android:textStyle="bold"
         android:layout_below="@+id/sign_in_button"
-        android:paddingTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:textColor="@color/colorPrimary"/>
-    <Button
-        android:id="@+id/sign_up_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
