@@ -15,15 +15,16 @@
     <string name="createaccount">Create Account</string>
     <string name="emptyerror">Should not be blank</string>
     <string name="confirmationcode">Confirmation Code</string>
-    <!--these strings define hints for edit texts in singin form-->
+
+    <!--these strings for Sign in activity-->
     <string name="sign_in_email_hint">E-mail</string>
     <string name="sign_in_password_hint">Password</string>
-    <!--string for sign in button-->
     <string name="sign_in">SIGN IN</string>
-    <!--string for for forgotten password-->
     <string name="froget_pass">Forgotten Password?</string>
-    <!--string for for title of sign in-->
     <string name="sign_in_title">Egyption Universities</string>
+    <string name="contacts_text">Contancts</string>
+    <string name="facebook">Facebook Page</string>
+
 
 
 
