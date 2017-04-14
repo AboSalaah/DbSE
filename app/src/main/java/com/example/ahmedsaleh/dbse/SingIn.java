@@ -41,6 +41,12 @@ public class SingIn extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemThatWasClickedId = item.getItemId();
         if (itemThatWasClickedId == R.id.action_signUp) {
@@ -50,11 +56,6 @@ public class SingIn extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
     //  this function for validating the user input for signin
     private boolean validate()
     {
