@@ -11,6 +11,15 @@
     <string name="signupemail">E-mail</string>
     <string name="signuppassword">Password</string>
     <string name="singupusername">UserName</string>
+
+    <!--these strings define hints for edit texts in edit profile form-->
+    <string name="old_email">Old e-mail</string>
+    <string name="old_password">Old password</string>
+    <string name="new_email">New e-mail</string>
+    <string name="new_password">New password</string>
+    <string name="new_username">New userName</string>
+    <string name="save_changes">Save changes</string>
+
     <!--string for create account button-->
     <string name="createaccount">Create Account</string>
     <string name="emptyerror">Should not be blank</string>
