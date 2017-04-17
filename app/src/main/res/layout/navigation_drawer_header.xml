@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="180dp"
-    android:background="@color/colorAccent"
+    android:background="@color/dbsecolor"
+    android:id="@+id/navigation_header"
     >
+    <TextView
+        android:id="@+id/textincircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:textSize="35sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:paddingLeft="13dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circleshape"/>
+    <TextView
+        android:id="@+id/username_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Example"
+        android:layout_below="@id/textincircle"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/email_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Example@yahoo.com"
+        android:layout_below="@id/username_header"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"/>
 
 </RelativeLayout>
