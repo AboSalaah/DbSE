@@ -11,6 +11,15 @@
     <string name="signupemail">E-mail</string>
     <string name="signuppassword">Password</string>
     <string name="singupusername">UserName</string>
+
+    <!--these strings define hints for edit texts in edit profile form-->
+    <string name="old_email">Old e-mail</string>
+    <string name="old_password">Old password</string>
+    <string name="new_email">New e-mail</string>
+    <string name="new_password">New password</string>
+    <string name="new_username">New userName</string>
+    <string name="save_changes">Save changes</string>
+
     <!--string for create account button-->
     <string name="createaccount">Create Account</string>
     <string name="emptyerror">Should not be blank</string>
@@ -27,6 +36,45 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--temp strings will be deleted-->
+
+    <string-array name="Universities">
+        <item>Cairo University</item>
+        <item>Alexandria University</item>
+        <item>T2feeel University</item>
+        <item>Ain Shames University</item>
+        <item>Helwan University</item>
+    </string-array>
+    <string-array name="h1">
+        <item>Faculty Of Engineering</item>
+        <item>Faculty Of Medicine</item>
+        <item>Faculty of ComputerScince</item>
+    </string-array>
+
+    <string-array name="h2">
+        <item>Faculty Of Engineering</item>
+        <item>Faculty Of Medicine</item>
+
+    </string-array>
+
+    <string-array name="h3">
+        <item>Faculty Of Engineering</item>
+        <item>Faculty Of Medicine</item>
+        <item>Faculty of ComputerScince</item>
+        <item>Faculty of Masscomm</item>
+    </string-array>
+
+    <string-array name="h4">
+        <item>Faculty Of Medicine</item>
+        <item>Faculty of Masscomm</item>
+        <item>Faculty of Cs</item>
+    </string-array>
+    <string-array name="h5">
+        <item>Faculty Of Engineering</item>
+    </string-array>
+
+    <!--temp strings will be deleted-->
 
 
 </resources>

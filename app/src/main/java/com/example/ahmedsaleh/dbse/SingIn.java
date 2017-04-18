@@ -19,13 +19,15 @@ public class SingIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button createaccount=(Button) findViewById(R.id.sign_in_button);
+        Button signInButton=(Button) findViewById(R.id.sign_in_button);
         Button facebookPage =(Button) findViewById(R.id.Facebook_Button);
-        createaccount.setOnClickListener(new View.OnClickListener() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(validate());
+                if(validate()){
+                    moveToUniversitiesActivity();
+                }
             }
         });
         facebookPage.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,10 @@ public class SingIn extends AppCompatActivity {
     }
     private void moveToSignUpActivity(){
         Intent i = new Intent(getApplicationContext(),SignUp.class);
+        startActivity(i);
+    }
+    private void moveToUniversitiesActivity(){
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
     }
     public static Intent openBbSE_FacebookPage(Context context) {
