@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -84,15 +85,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if(id == R.id.Edit_profile){
-//            moveToEditProfileActiviy();  // ERROR !!!!!!!!!!!!!!!
+            moveToEditProfileActiviy();
+        }
+        if(id == R.id.View_Profile){
+            moveToViewProfileActiviy();
+        }
+        if(id == R.id.about_dbse){
+            moveToAboutDbSEActivity();
+        }
+        if(id == R.id.Sign_out){
+            movToSignInActivity();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private void moveToViewProfileActiviy() {
+        Intent i = new Intent(getApplicationContext(),ViewProfile.class);
+        startActivity(i);
+    }
+
     private void moveToEditProfileActiviy() {
         Intent i = new Intent(getApplicationContext(),EditProfile.class);
+        startActivity(i);
+    }
+    private void movToSignInActivity() {
+        Intent i = new Intent(getApplicationContext(),SingIn.class);
+        startActivity(i);
+    }
+    private void moveToAboutDbSEActivity() {
+        Intent i = new Intent(getApplicationContext(),AboutDbSE.class);
         startActivity(i);
     }
 

@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/singuprelativelayout"
-    android:background="@color/dbsecolor"
+    android:background="@drawable/background2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -14,10 +14,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:id="@+id/dbse_logo"
+        style="@style/DbseLogo"
+        android:text="@string/app_name"/>
+    <TextView
         android:id="@+id/SignInTitleText"
-        style="@style/SignUptextstyle"
-        android:layout_centerHorizontal="true"
-        android:text="@string/sign_in_title"/>
+        style="@style/SignIntextstyle"
+        android:text="@string/sign_in_title"
+        android:layout_below="@+id/dbse_logo"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,8 +30,7 @@
         android:id="@+id/signinlinearlayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/SignInTitleText"
-        >
+        android:layout_below="@+id/SignInTitleText">
     <EditText
         style="@style/edittext_sign_in_up_style"
         android:id="@+id/signIn_user_email"
@@ -37,46 +40,61 @@
         android:id="@+id/signIn_password"
         android:inputType="textPassword"
         android:hint="@string/sign_in_password_hint"/>
-    </LinearLayout>
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/signinlinearlayout"
-        android:background="@drawable/roundedborder"
-        />
-    <TextView
-        android:id="@+id/forget_password"
+        android:background="@drawable/roundedborder" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/forget_password_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/signinlinearlayout">
+        <CheckBox
+            android:id="@+id/remember_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_me"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:clickable="true"/>
+        <TextView
+            android:id="@+id/forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:text="@string/froget_pass"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/Facebook_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/froget_pass"
-        android:textStyle="bold"
-        android:layout_below="@+id/sign_in_button"
+        android:src="@mipmap/ic_facebook"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/forget_password_linearlayout"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:background="@color/dbsecolor"
         android:clickable="true"/>
     <TextView
-        android:id="@+id/contacts_text"
+        android:id="@+id/SignUp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="25sp"
-        android:layout_below="@id/forget_password"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="@string/contacts_text"
-        android:textColor="@color/white"/>
-    <Button
-        android:id="@+id/Facebook_Button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/contacts_text"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="@string/facebook"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"/>
+        android:clickable="true"
+        android:layout_below="@+id/Facebook_Button"/>
 </RelativeLayout>
 </ScrollView>

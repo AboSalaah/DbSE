@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SingIn extends AppCompatActivity {
@@ -20,7 +21,9 @@ public class SingIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button signInButton=(Button) findViewById(R.id.sign_in_button);
-        Button facebookPage =(Button) findViewById(R.id.Facebook_Button);
+        ImageView facebookPage =(ImageView) findViewById(R.id.Facebook_Button);
+        TextView signUpTextView = (TextView) findViewById(R.id.SignUp_text);
+        TextView forgotPassword = (TextView) findViewById(R.id.forget_password) ;
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +40,23 @@ public class SingIn extends AppCompatActivity {
                 Intent facebookIntent = openBbSE_FacebookPage(SingIn.this);
                 Intent chooser = Intent.createChooser(facebookIntent,"Open By");
                 startActivity(chooser);
+            }
+        });
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToSignUpActivity();
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder=new AlertDialog.Builder(SingIn.this);
+                View mview=getLayoutInflater().inflate(R.layout.forgot_password_dialog,null);
+                mBuilder.setView(mview);
+                AlertDialog dialog=mBuilder.create();
+                dialog.show();
             }
         });
 
