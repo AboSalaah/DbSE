@@ -4,6 +4,7 @@ package com.example.ahmedsaleh.dbse;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,7 +39,7 @@ public class UniFragment extends Fragment {
     Exp_list_Adapter myAdapter;
     ExpandableListView expandableListView;
     String result=null;
-    StringBuilder url=new StringBuilder("http://b75183cd.ngrok.io/dbse/public/api/v1/university?token=");
+    StringBuilder url=new StringBuilder();
     //String URL="http://516c8af0.ngrok.io/dbse/public/api/v1/university?token=";
     public UniFragment() {
         // Required empty public constructor
@@ -88,10 +89,17 @@ public class UniFragment extends Fragment {
         childs.put(headings.get(4),l5);
          myAdapter=new Exp_list_Adapter(getActivity(),headings,childs);
          */
-        myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(),new HashMap<ListItem,ArrayList<ListItem>>());
+        ArrayList<ListItem>headers=new ArrayList<ListItem>();
+        ArrayList<ListItem>childs=new ArrayList<ListItem>();
+        HashMap<ListItem,ArrayList<ListItem>>hashMap=new HashMap<>();
+        headers.add(new ListItem("T2feeel",1));
+        childs.add(new ListItem("handasaT2feel",1));
+        childs.add(new ListItem("tebT2feel",2));
+        hashMap.put(headers.get(0),childs);
+        myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
-        url.append(getString(R.string.token));
-       // connect();
+        url.append(getString(R.string.url)+"university"+"?token="+getString(R.string.token));
+        connect();
     }
 
 
@@ -132,17 +140,15 @@ public class UniFragment extends Fragment {
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
                                 String logo=uni.getString("logo");
-                                Bitmap logoo=QueryUtils.converttobitmap(logo);
-                                headers.add(new ListItem(name,logoo,id));
+                                headers.add(new ListItem(name,logo,id));
                                 JSONArray faculties=uni.getJSONArray("faculties");
                                 for(int j=0;j<faculties.length();++j)
                                 {
                                     JSONObject faculty=faculties.getJSONObject(j);
                                     String facultyname=faculty.getString("name");
                                     String facultylogo=faculty.getString("logo");
-                                    Bitmap facultylogoo=QueryUtils.converttobitmap(facultylogo);
                                     int facultyid=faculty.getInt("id");
-                                    childs.add(new ListItem(facultyname,facultylogoo,facultyid));
+                                    childs.add(new ListItem(facultyname,facultylogo,facultyid));
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();

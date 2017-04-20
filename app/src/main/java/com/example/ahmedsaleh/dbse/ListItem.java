@@ -1,6 +1,7 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 
 /**
@@ -9,14 +10,20 @@ import android.graphics.Bitmap;
 public class ListItem {
 
     private String mItemName;
-    private Bitmap mItemLogo;
+    private String mItemLogo;
     private int mItemId;
-    public ListItem(String name,Bitmap logo,int id)
+    boolean mHasImage;
+    public ListItem(String name, String  logo, int id)
     {
-        mItemName=name; mItemLogo=logo; mItemId=id;
+        mItemName=name; mItemLogo=logo; mItemId=id; mHasImage=true;
+    }
+    public ListItem(String name,int id)
+    {
+        mItemName=name; mItemId=id; mHasImage=false;
     }
     public String getmItemName(){return mItemName;}
-    public Bitmap getmItemLogo(){return mItemLogo;}
+    public String getmItemLogo(){return mItemLogo;}
     public int getmItemId(){return mItemId;}
+    public boolean getmHasImage(){return mHasImage;}
 
 }

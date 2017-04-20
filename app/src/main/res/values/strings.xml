@@ -86,6 +86,7 @@
 
     <!--temp strings will be deleted-->
     <!-- Token-->
-    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI2MTc1NjQsImV4cCI6MTQ5MjYyMTE2NCwibmJmIjoxNDkyNjE3NTY0LCJqdGkiOiJXVzQ4Y05DWXJHc2paWDNTIn0.6zz10KBO2JAdFyU3ODJND1xldDC9vDs0FV0P5yGd7YY</string>
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI3MDczNDUsImV4cCI6MTQ5MjcxMDk0NSwibmJmIjoxNDkyNzA3MzQ1LCJqdGkiOiJmQ1lLSHBzQXBSSUVsMzlmIn0.Htk60bbRbXKn65WUFAIJfq0XHfEBlXuYYZ-lzk9Nk4w</string>
 
+    <string name="url">http://8907e784.ngrok.io/dbse/public/api/v1/</string>
 </resources>

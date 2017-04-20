@@ -1,8 +1,11 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +71,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final ListItem header_title=(ListItem)getGroup(groupPosition);
         String name=header_title.getmItemName();
-        Bitmap logo=header_title.getmItemLogo();
+        String logo=header_title.getmItemLogo();
         if(convertView==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater)this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -75,17 +80,23 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
         TextView textView=(TextView)convertView.findViewById(R.id.parent_exp_list_item_text_view);
         textView.setTypeface(null, Typeface.BOLD);
         textView.setText(name);
-        ImageView imageView=(ImageView)convertView.findViewById(R.id.parent_exp_list_item_image_view);
-        imageView.setImageBitmap(logo);
+
+        if(header_title.getmHasImage()) {
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.parent_exp_list_item_image_view);
+            Picasso.with(ctx).load(logo).into(imageView);
+        }
 
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(ctx,details.class);
-                intent.putExtra("Uni_name", header_title);
+                Log.i(ctx.toString(),"ana d5ltt hnaaaaaaaa");
+                Intent intent = new Intent(ctx,University_Profile.class);
+                intent.putExtra("type","university");
+                intent.putExtra("id",String.valueOf(header_title.getmItemId()));
+                intent.putExtra("url",ctx.getString(R.string.url));
                 ctx.startActivity(intent);
-                */
+
             }
         });
         return convertView;
@@ -95,7 +106,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final ListItem child_title=(ListItem) child_titles.get(header_titles.get(groupPosition)).get(childPosition);
         String title=child_title.getmItemName();
-        Bitmap logo=child_title.getmItemLogo();
+       String  logo=child_title.getmItemLogo();
         if(convertView==null)
         {
             LayoutInflater layoutInflater=(LayoutInflater)this.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -103,15 +114,19 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
         }
         TextView textView=(TextView)convertView.findViewById(R.id.child_exp_list_item_text_view);
         textView.setText(title);
-        ImageView imageView=(ImageView)convertView.findViewById(R.id.child_exp_list_item_image_view);
-        imageView.setImageBitmap(logo);
+       if(child_title.getmHasImage()) {
+           ImageView imageView = (ImageView) convertView.findViewById(R.id.child_exp_list_item_image_view);
+           Picasso.with(ctx).load(logo).into(imageView);
+       }
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(ctx,details.class);
-                intent.putExtra("Uni_name", child_title);
+                Intent intent = new Intent(ctx,University_Profile.class);
+                intent.putExtra("type","faculty");
+                intent.putExtra("id",String.valueOf(child_title.getmItemId()));
+                intent.putExtra("url",ctx.getString(R.string.url));
                 ctx.startActivity(intent);
-                */
+
             }
         });
         return convertView;

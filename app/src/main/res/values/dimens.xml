@@ -8,4 +8,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="edittextwidthsignup">300dp</dimen>
     <dimen name="edittexthieghtsignup">50dp</dimen>
+    <dimen name="labelstextsizeforprofile">50dp</dimen>
 </resources>
