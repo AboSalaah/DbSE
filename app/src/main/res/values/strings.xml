@@ -34,6 +34,16 @@
     <string name="contacts_text">Contancts</string>
     <string name="facebook">Facebook Page</string>
 
+
+    <!-- Strings for Search Input Dialog-->
+    <string name="item_name">Name</string>
+    <string name="item_name_hint">Enter University Name</string>
+    <string name="fees">Fees</string>
+    <string name="lower_bound">From</string>
+    <string name="upper_bound">To</string>
+    <string name="addcer">Admission Certificates</string>
+    <string name="yos">Years Of Study</string>
+    <string name="degreeawarded">Degree Awarded</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -75,6 +85,7 @@
     </string-array>
 
     <!--temp strings will be deleted-->
-
+    <!-- Token-->
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI2MTc1NjQsImV4cCI6MTQ5MjYyMTE2NCwibmJmIjoxNDkyNjE3NTY0LCJqdGkiOiJXVzQ4Y05DWXJHc2paWDNTIn0.6zz10KBO2JAdFyU3ODJND1xldDC9vDs0FV0P5yGd7YY</string>
 
 </resources>

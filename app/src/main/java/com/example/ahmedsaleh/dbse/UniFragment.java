@@ -2,10 +2,14 @@ package com.example.ahmedsaleh.dbse;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.telecom.Call;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,7 +38,8 @@ public class UniFragment extends Fragment {
     Exp_list_Adapter myAdapter;
     ExpandableListView expandableListView;
     String result=null;
-    String URL="http://9cbcd085.ngrok.io/dbse/public/api/v1/university";
+    StringBuilder url=new StringBuilder("http://b75183cd.ngrok.io/dbse/public/api/v1/university?token=");
+    //String URL="http://516c8af0.ngrok.io/dbse/public/api/v1/university?token=";
     public UniFragment() {
         // Required empty public constructor
     }
@@ -53,7 +59,7 @@ public class UniFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         //this part will be deleted
         expandableListView=(ExpandableListView)getView().findViewById(R.id.exp_listview_uni);
-        String header_items[]=getResources().getStringArray(R.array.Universities);
+       /* String header_items[]=getResources().getStringArray(R.array.Universities);
         String cairo[]=getResources().getStringArray(R.array.h1);
         String alex[]=getResources().getStringArray(R.array.h2);
         String t2fel[]=getResources().getStringArray(R.array.h3);
@@ -81,17 +87,20 @@ public class UniFragment extends Fragment {
         childs.put(headings.get(3),l4);
         childs.put(headings.get(4),l5);
          myAdapter=new Exp_list_Adapter(getActivity(),headings,childs);
+         */
+        myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(),new HashMap<ListItem,ArrayList<ListItem>>());
         expandableListView.setAdapter(myAdapter);
+        url.append(getString(R.string.token));
        // connect();
     }
 
 
 
-    /*void connect()
+    void connect()
     {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(URL)
+                .url(url.toString())
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -104,30 +113,41 @@ public class UniFragment extends Fragment {
             public void onResponse(okhttp3.Call call, Response response) throws IOException
             {
                 result=response.body().string().toString();
+                Log.i(getTag(),"amiiiiiiiiiiiiirr "+result);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run()
                     {
 
-                        ArrayList<String>headers=new ArrayList<String>();
-                        ArrayList<String>childs=new ArrayList<String>();
+                        ArrayList<ListItem> headers=new ArrayList<ListItem>();
+                        ArrayList<ListItem>childs=new ArrayList<ListItem>();
 
-                        HashMap<String,ArrayList<String>>hashMap=new HashMap<String, ArrayList<String>>();
+                        HashMap<ListItem,ArrayList<ListItem>>hashMap=new HashMap<ListItem, ArrayList<ListItem>>();
                         try {
-                           JSONArray jsonArray=new JSONArray(result);
-                           for(int i=0;i<jsonArray.length();++i)
-                           {
-                               JSONObject jsonObject=jsonArray.getJSONObject(i);
-                              headers.add(jsonObject.getString("name"));
-                               JSONArray jsonArray1=jsonObject.getJSONArray("faculties");
-                               for(int j=0;j<jsonArray1.length();++j)
-                               {
-                                   childs.add(jsonArray1.getString(i));
-                               }
-                               hashMap.put(headers.get(i),new ArrayList<String>(childs));
-                               childs.clear();
 
-                           }
+                            JSONArray universities=new JSONArray(result);
+                            for(int i=0;i<universities.length();++i)
+                            {
+                                JSONObject uni=universities.getJSONObject(i);
+                                String name=uni.getString("name");
+                                int id=uni.getInt("id");
+                                String logo=uni.getString("logo");
+                                Bitmap logoo=QueryUtils.converttobitmap(logo);
+                                headers.add(new ListItem(name,logoo,id));
+                                JSONArray faculties=uni.getJSONArray("faculties");
+                                for(int j=0;j<faculties.length();++j)
+                                {
+                                    JSONObject faculty=faculties.getJSONObject(j);
+                                    String facultyname=faculty.getString("name");
+                                    String facultylogo=faculty.getString("logo");
+                                    Bitmap facultylogoo=QueryUtils.converttobitmap(facultylogo);
+                                    int facultyid=faculty.getInt("id");
+                                    childs.add(new ListItem(facultyname,facultylogoo,facultyid));
+                                }
+                                hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
+                                childs.clear();
+                            }
+
 
                             myAdapter.setAdapter(getActivity(),headers,hashMap);
 
@@ -143,7 +163,12 @@ public class UniFragment extends Fragment {
         });
 
     }
-    */
+
+
+
+
+
 }
+
 
 

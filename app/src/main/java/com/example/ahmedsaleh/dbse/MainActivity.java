@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if(id == R.id.Edit_profile){
-//            moveToEditProfileActiviy();  // ERROR !!!!!!!!!!!!!!!
+            moveToEditProfileActiviy();  // ERROR !!!!!!!!!!!!!!!
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -95,5 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent i = new Intent(getApplicationContext(),EditProfile.class);
         startActivity(i);
     }
+
 
 }
