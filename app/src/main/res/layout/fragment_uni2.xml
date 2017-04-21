@@ -12,11 +12,11 @@
 
         />
     <!-- TODO: Update blank fragment layout -->
-   <ExpandableListView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/exp_listview_uni">
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/exp_listview_uni">
 
-   </ExpandableListView>
+    </ExpandableListView>
 
 </LinearLayout>

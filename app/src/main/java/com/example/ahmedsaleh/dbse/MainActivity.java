@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(id == R.id.Sign_out){
             movToSignInActivity();
+            finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

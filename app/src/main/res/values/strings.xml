@@ -1,4 +1,7 @@
 <resources>
+    <!--API Connection-->
+    <string name="local">2fe2762f.ngrok.io</string>
+
     <string name="app_name">DbSE</string>
     <string name="title_activity_universities">Universities</string>
 
@@ -22,6 +25,8 @@
 
     <!--string for create account button-->
     <string name="createaccount">Create Account</string>
+    <string name="next">NEXT</string>
+    <string name="hint_real_name">Real Name</string>
     <string name="emptyerror">Should not be blank</string>
     <string name="confirmationcode">Confirmation Code</string>
     <string name="submit">Submit</string>

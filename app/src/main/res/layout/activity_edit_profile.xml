@@ -19,25 +19,20 @@
         android:layout_centerHorizontal="true">
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/old_email"
-            android:id="@+id/old_email" />
+            android:id="@+id/real_user_name" />
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/old_password"
-            android:id="@+id/emailedittext" />
-        <EditText
-            style="@style/edittext_sign_in_up_style"
-            android:hint="@string/new_username"
             android:id="@+id/new_username"/>
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/new_email"
             android:id="@+id/new_email"/>
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/new_password"
             android:inputType="textPassword"
             android:id="@+id/new_password"/>
+        <EditText
+            style="@style/edittext_sign_in_up_style"
+            android:id="@+id/user_gender"/>
 
     </LinearLayout>
 

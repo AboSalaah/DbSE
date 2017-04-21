@@ -13,53 +13,90 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/register1"
-        style="@style/SignUptextstyle"
-        android:text="@string/register1"
-       />
-    <TextView
-        android:id="@+id/register2"
-        style="@style/SignUptextstyle"
-        android:text="@string/register2"
-        android:layout_below="@id/register1"
-        android:layout_marginBottom="20dp"
-       />
+        <TextView
+            android:id="@+id/register1"
+            style="@style/SignUptextstyle"
+            android:text="@string/register1"
+            />
+        <TextView
+            android:id="@+id/register2"
+            style="@style/SignUptextstyle"
+            android:text="@string/register2"
+            android:layout_below="@id/register1"
+            android:layout_marginBottom="20dp"
+            />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/singuplinearlayout"
-        android:layout_below="@id/register2"
-        android:layout_centerHorizontal="true"
-        >
-        <EditText
-           style="@style/edittext_sign_in_up_style"
-            android:hint="@string/singupusername"
-            android:id="@+id/usernameedittext"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/singuplinearlayout"
+            android:layout_below="@id/register2"
+            android:layout_centerHorizontal="true"
+            >
+            <EditText
+                style="@style/edittext_sign_in_up_style"
+                android:hint="@string/singupusername"
+                android:id="@+id/usernameedittext"
+                />
+            <EditText
+                style="@style/edittext_sign_in_up_style"
+                android:hint="@string/signupemail"
+                android:id="@+id/emailedittext"
+                />
+            <EditText
+                style="@style/edittext_sign_in_up_style"
+                android:hint="@string/signuppassword"
+                android:inputType="textPassword"
+                android:id="@+id/passwordedittext" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/next_step"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/singuplinearlayout"
+            android:background="@drawable/roundedborder"
             />
         <EditText
             style="@style/edittext_sign_in_up_style"
-            android:hint="@string/signupemail"
-            android:id="@+id/emailedittext"
+            android:hint="@string/hint_real_name"
+            android:id="@+id/real_user_name_editText"
+            android:layout_below="@+id/singuplinearlayout"
+            android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/checkboxs_linearlayout"
+            android:layout_below="@id/real_user_name_editText"
+            android:layout_centerHorizontal="true">
+            <CheckBox
+                android:id="@+id/male_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="Male" />
+            <CheckBox
+                android:id="@+id/female_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="Female"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/createaccount_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/createaccount"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/checkboxs_linearlayout"
+            android:background="@drawable/roundedborder"
+            android:visibility="invisible"
+            android:layout_marginTop="8dp"
             />
-        <EditText
-            style="@style/edittext_sign_in_up_style"
-            android:hint="@string/signuppassword"
-            android:inputType="textPassword"
-            android:id="@+id/passwordedittext" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/createaccount_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/createaccount"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/singuplinearlayout"
-        android:background="@drawable/roundedborder"
-        />
     </RelativeLayout>
 </ScrollView>

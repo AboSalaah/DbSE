@@ -20,7 +20,6 @@
         android:id="@+id/View_Profile_username_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Example"
         android:layout_below="@id/View_Profile_textincircle"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
@@ -29,7 +28,6 @@
         android:id="@+id/email_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Example@yahoo.com"
         android:layout_below="@id/View_Profile_username_header"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"/>
