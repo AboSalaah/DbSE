@@ -1,17 +1,23 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Created by Ahmed Saleh on 4/19/2017.
@@ -54,5 +60,21 @@ public class QueryUtils {
         } catch (Exception e) {
             return null;
         }
+    }
+    public static void showLocationOnMap(Context ctx,double lat,double longt,String location) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("http://maps.google.com/maps?q=loc:" + lat + "," + longt+" ("+location+")"));
+        PackageManager manager = ctx.getPackageManager();
+        List<ResolveInfo> list = manager.queryIntentActivities(intent, 0);
+
+        if (list != null && list.size() > 0) {
+            ctx.startActivity(intent);
+        } else {
+            //No activity to handle the intent.
+            Toast.makeText(ctx, "Your Device doesn't have any app to show map",
+                    Toast.LENGTH_LONG).show();
+
+        }
+
     }
 }

@@ -83,10 +83,13 @@
     <string-array name="h5">
         <item>Faculty Of Engineering</item>
     </string-array>
-
+    <string name="your_string_here">
+        <u>LocationOnMap</u>.
+    </string>
     <!--temp strings will be deleted-->
     <!-- Token-->
-    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI3MDczNDUsImV4cCI6MTQ5MjcxMDk0NSwibmJmIjoxNDkyNzA3MzQ1LCJqdGkiOiJmQ1lLSHBzQXBSSUVsMzlmIn0.Htk60bbRbXKn65WUFAIJfq0XHfEBlXuYYZ-lzk9Nk4w</string>
+    <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI4MTA2MTQsImV4cCI6MTQ5MjgxNDIxNCwibmJmIjoxNDkyODEwNjE0LCJqdGkiOiJudjJMcGlwb3R0NzZweHVkIn0.xhaFAZfrA7Y7VwSMYhmjzkMz6YqtDp1W6l3Mgz6xFbc</string>
 
-    <string name="url">http://8907e784.ngrok.io/dbse/public/api/v1/</string>
+    <string name="url">http://1d8a74b1.ngrok.io/dbse/public/api/v1/</string>
+    <string name="imageurl">http://1d8a74b1.ngrok.io/dbse/public/</string>
 </resources>

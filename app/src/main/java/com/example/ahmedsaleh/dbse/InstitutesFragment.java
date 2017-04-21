@@ -89,8 +89,10 @@ public class InstitutesFragment extends Fragment {
         hashMap.put(headers.get(0),childs);
         myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
+        url.setLength(0);
         url.append(getString(R.string.url)+"institute"+"?token="+getString(R.string.token));
-        // connect();
+        Log.i("tag","instituteurl  "+url.toString());
+       // connect();
 
 
     }
@@ -131,14 +133,12 @@ public class InstitutesFragment extends Fragment {
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
                                 headers.add(new ListItem(name,id,"institute"));
-                                JSONArray faculties=uni.getJSONArray("faculties");
-                                for(int j=0;j<faculties.length();++j)
+                                String departments=uni.getString("departments");
+                                String parts[]=departments.split("/");
+                                for(int j=0;j<parts.length;++j)
                                 {
-                                    JSONObject faculty=faculties.getJSONObject(j);
-                                    String facultyname=faculty.getString("name");
-                                    String facultylogo=faculty.getString("logo");
-                                    int facultyid=faculty.getInt("id");
-                                    childs.add(new ListItem(facultyname,facultylogo,facultyid,"instdep"));
+
+                                    childs.add(new ListItem(parts[j],j,"instdep"));
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();

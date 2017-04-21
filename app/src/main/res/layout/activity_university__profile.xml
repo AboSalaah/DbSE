@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.ahmedsaleh.dbse.University_Profile"
     android:orientation="vertical"
-    android:background="@drawable/pic13"
+    android:background="@drawable/pic12"
     >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -209,7 +209,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/uni_profile_department_label"
+            android:id="@+id/faculty_profile_department_label"
             style="@style/labels_profile_style"
             />
     <TextView
@@ -218,6 +218,20 @@
         android:id="@+id/faculty_profile_department"
         style="@style/item_attributes"
         />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/uni_profile_location_on_map_label"
+            style="@style/labels_profile_style"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/uni_profile_location_on_map"
+            android:text="@string/your_string_here"
+            style="@style/item_attributes"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

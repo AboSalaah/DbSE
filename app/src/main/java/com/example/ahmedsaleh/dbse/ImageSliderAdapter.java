@@ -7,20 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 /**
  * Created by Ahmed Saleh on 4/21/2017.
  */
 public class ImageSliderAdapter extends PagerAdapter {
     private Context ctx;
-    private int[]sliderimagesId;
-    public ImageSliderAdapter(Context ctx,int []imagesid)
+    private ArrayList<String>sliderimagesUrls;
+    public ImageSliderAdapter(Context ctx,ArrayList<String>imagesid)
     {
         this.ctx=ctx;
-        sliderimagesId=imagesid;
+        sliderimagesUrls=imagesid;
     }
     @Override
     public int getCount() {
-        return sliderimagesId.length;
+        return sliderimagesUrls.size();
     }
 
     @Override
@@ -37,7 +41,8 @@ public class ImageSliderAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView mImageView = new ImageView(ctx);
         mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        mImageView.setImageResource(sliderimagesId[position]);
+        Picasso.with(ctx).load(sliderimagesUrls.get(position)).into(mImageView);
+      //  mImageView.setImageResource(sliderimagesId[position]);
         ((ViewPager) container).addView(mImageView, 0);
         return mImageView;
     }
@@ -47,8 +52,8 @@ public class ImageSliderAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
-    public void setImages(int images[])
+    public void setImages(ArrayList<String> images)
     {
-        sliderimagesId=images;
+        sliderimagesUrls=images;
     }
 }

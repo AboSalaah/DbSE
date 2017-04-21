@@ -92,7 +92,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
             public void onClick(View v) {
                 Log.i(ctx.toString(),"ana d5ltt hnaaaaaaaa");
                 Intent intent = new Intent(ctx,University_Profile.class);
-                intent.putExtra("type","university");
+                intent.putExtra("type",header_title.getmType());
                 intent.putExtra("id",String.valueOf(header_title.getmItemId()));
                 intent.putExtra("url",ctx.getString(R.string.url));
                 ctx.startActivity(intent);
@@ -122,7 +122,9 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ctx,University_Profile.class);
-                intent.putExtra("type","faculty");
+
+                intent.putExtra("type",child_title.getmType());
+
                 intent.putExtra("id",String.valueOf(child_title.getmItemId()));
                 intent.putExtra("url",ctx.getString(R.string.url));
                 ctx.startActivity(intent);

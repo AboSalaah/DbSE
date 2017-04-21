@@ -98,8 +98,10 @@ public class UniFragment extends Fragment {
         hashMap.put(headers.get(0),childs);
         myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
+        url.setLength(0);
         url.append(getString(R.string.url)+"university"+"?token="+getString(R.string.token));
-       // connect();
+        Log.i("tag","universityurl  "+url.toString());
+        connect();
     }
 
 
