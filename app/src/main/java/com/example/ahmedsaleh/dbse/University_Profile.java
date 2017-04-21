@@ -2,7 +2,10 @@ package com.example.ahmedsaleh.dbse;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +42,7 @@ public class University_Profile extends AppCompatActivity {
     private int nedeedpadding;
     private Faculties_Custom_Adapter adapter;
     private String tag="University_Profile";
+    private ImageSliderAdapter adapterView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,85 @@ public class University_Profile extends AppCompatActivity {
         Log.i("University_Profile","el typeeeee "+itemType);
         Log.i("University_Profile","el id "+itemId);
 
+        // this part will be deleted
+        nedeedpadding=QueryUtils.getDppixels(this,5);
+        int imagesid[]={R.drawable.pic4,R.drawable.pic5};
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.image_view_pager);
+        adapterView = new ImageSliderAdapter(this,imagesid);
+        mViewPager.setAdapter(adapterView);
+        TextView textView=(TextView)findViewById(R.id.uni_profile_name_label);
+        textView.setText("Name");
+       // textView.setPadding(0,nedeedpadding,0,nedeedpadding);
+        //textView.setBackgroundResource(R.drawable.labelrectangularshape);
+        TextView textView7=(TextView)findViewById(R.id.uni_profile_name);
+        textView7.setText("Cairo University");
+        //textView7.setPadding(0,nedeedpadding,0,nedeedpadding);
+        //textView7.setBackgroundResource(R.drawable.rectangularshape);
+        ImageView imageView=(ImageView)findViewById(R.id.uni_profile_logo);
+        imageView.setImageResource(R.drawable.ic_menu_camera);
+        TextView textView711=(TextView)findViewById(R.id.uni_profile_discreption_label);
+        textView711.setText("Description");
+       // textView711.setPadding(0,nedeedpadding,0,nedeedpadding);
+      //  textView711.setBackgroundResource(R.drawable.labelrectangularshape);
+        TextView textView71=(TextView)findViewById(R.id.uni_profile_discreption);
+        textView71.setText("gam3a m3fna fel giza");
+       // textView71.setPadding(0,nedeedpadding,0,nedeedpadding);
+        //textView71.setBackgroundResource(R.drawable.rectangularshape);
+        TextView textView88=(TextView)findViewById(R.id.uni_profile_location_label);
+        textView88.setText("Location");
+        //textView88.setPadding(0,nedeedpadding,0,nedeedpadding);
+        //textView88.setBackgroundResource(R.drawable.labelrectangularshape);
+        TextView textView89=(TextView)findViewById(R.id.uni_profile_location);
+        textView89.setText("Giza");
+        //textView89.setPadding(0,nedeedpadding,0,nedeedpadding);
+       // textView89.setBackgroundResource(R.drawable.rectangularshape);
+        TextView textView1=(TextView)findViewById(R.id.uni_profile_image_label);
+        textView1.setText("Photos");
+        TextView textView2=(TextView)findViewById(R.id.uni_profile_city_label);
+        textView2.setText("City");
+        TextView textView3=(TextView)findViewById(R.id.uni_profile_city);
+        textView3.setText("Giza");
+        TextView textView4=(TextView)findViewById(R.id.uni_profile_contacts_label);
+        textView4.setText("Contacts");
+        TextView textView5=(TextView)findViewById(R.id.uni_profile_contacts);
+        textView5.setText("13421525");
+        TextView textView6=(TextView)findViewById(R.id.uni_profile_website_label);
+        textView6.setText("Website");
+        TextView textview122=(TextView)findViewById(R.id.uni_profile_website);
+        textview122.setText("cufe.com");
+        TextView textView8=(TextView)findViewById(R.id.uni_profile_facebookpage);
+        textView8.setText("facebook.com/cufe");
+        TextView textView9=(TextView)findViewById(R.id.uni_profile_facebookpage_label);
+        textView9.setText("FacebookPage");
+        TextView textView10=(TextView)findViewById(R.id.uni_profile_faculties_list_view_label);
+        textView10.setText("Faculties");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////
         nedeedpadding=QueryUtils.getDppixels(getApplicationContext(),10);
         ArrayList<List_view_faculty_item>arr=new ArrayList<>();
         arr.add(new List_view_faculty_item("eng",1));
@@ -111,7 +194,7 @@ public class University_Profile extends AppCompatActivity {
             }
         });
         Log.i("University_Profile","aheeeeeeh  "+url.toString());
-        connect();
+       // connect();
 
     }
 
@@ -162,15 +245,15 @@ public class University_Profile extends AppCompatActivity {
                             String logourl=jsonObject1.getString("logo");
                             if(!logourl.equals("null"))
                             {
-                                TextView textView51=(TextView)findViewById(R.id.uni_profile_logo_label);
-                                textView51.setText("Logo");
-                                textView51.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                                        getResources().getDimension(R.dimen.labelstextsizeforprofile));
-                                Picasso.with(getApplicationContext()).load(logourl).into(imageView2);
+                               // TextView textView51=(TextView)findViewById(R.id.uni_profile_logo_label);
+                               // textView51.setText("Logo");
+                                //textView51.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                                      // getResources().getDimension(R.dimen.labelstextsizeforprofile));
+                              //  Picasso.with(getApplicationContext()).load(logourl).into(imageView2);
                             }
 
 
-                            TextView textView52=(TextView)findViewById(R.id.uni_profile_image_label);
+                           /* TextView textView52=(TextView)findViewById(R.id.uni_profile_image_label);
                             textView52.setText("Image");
                             textView52.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                                     getResources().getDimension(R.dimen.labelstextsizeforprofile));
@@ -178,6 +261,7 @@ public class University_Profile extends AppCompatActivity {
                             Log.i(tag,"el sora "+imageurl);
                             ImageView imageView=(ImageView)findViewById(R.id.uni_profile_imaage);
                             Picasso.with(getApplicationContext()).load(imageurl).into(imageView);
+                            */
 
 
 

@@ -8,5 +8,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="edittextwidthsignup">300dp</dimen>
     <dimen name="edittexthieghtsignup">50dp</dimen>
-    <dimen name="labelstextsizeforprofile">50dp</dimen>
+    <dimen name="labelstextsizeforprofile">30dp</dimen>
+    <dimen name="itemattributetextsize">20dp</dimen>
+    <!-- this dimen for padding inside shape for labels and attributes for item profile-->
+    <dimen name="itempadding">10dp</dimen>
+    <dimen name="logoforprofile">50dp</dimen>
 </resources>

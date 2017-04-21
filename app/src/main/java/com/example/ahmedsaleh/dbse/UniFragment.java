@@ -36,10 +36,10 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  */
 public class UniFragment extends Fragment {
-    Exp_list_Adapter myAdapter;
-    ExpandableListView expandableListView;
-    String result=null;
-    StringBuilder url=new StringBuilder();
+   private Exp_list_Adapter myAdapter;
+    private ExpandableListView expandableListView;
+    private String result=null;
+    private StringBuilder url=new StringBuilder();
     //String URL="http://516c8af0.ngrok.io/dbse/public/api/v1/university?token=";
     public UniFragment() {
         // Required empty public constructor
@@ -92,14 +92,14 @@ public class UniFragment extends Fragment {
         ArrayList<ListItem>headers=new ArrayList<ListItem>();
         ArrayList<ListItem>childs=new ArrayList<ListItem>();
         HashMap<ListItem,ArrayList<ListItem>>hashMap=new HashMap<>();
-        headers.add(new ListItem("T2feeel",1));
-        childs.add(new ListItem("handasaT2feel",1));
-        childs.add(new ListItem("tebT2feel",2));
+        headers.add(new ListItem("T2feeel",1,"university"));
+        childs.add(new ListItem("handasaT2feel",1,"university"));
+        childs.add(new ListItem("tebT2feel",2,"university"));
         hashMap.put(headers.get(0),childs);
         myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
         url.append(getString(R.string.url)+"university"+"?token="+getString(R.string.token));
-        connect();
+       // connect();
     }
 
 
@@ -140,7 +140,7 @@ public class UniFragment extends Fragment {
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
                                 String logo=uni.getString("logo");
-                                headers.add(new ListItem(name,logo,id));
+                                headers.add(new ListItem(name,logo,id,"university"));
                                 JSONArray faculties=uni.getJSONArray("faculties");
                                 for(int j=0;j<faculties.length();++j)
                                 {
@@ -148,7 +148,7 @@ public class UniFragment extends Fragment {
                                     String facultyname=faculty.getString("name");
                                     String facultylogo=faculty.getString("logo");
                                     int facultyid=faculty.getInt("id");
-                                    childs.add(new ListItem(facultyname,facultylogo,facultyid));
+                                    childs.add(new ListItem(facultyname,facultylogo,facultyid,"faculty"));
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();

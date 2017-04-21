@@ -1,7 +1,9 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,12 @@ import java.util.ArrayList;
  * Created by Ahmed Saleh on 4/20/2017.
  */
 public class Faculties_Custom_Adapter extends ArrayAdapter<List_view_faculty_item> {
-
+    private Context context;
     public Faculties_Custom_Adapter(Context context, ArrayList<List_view_faculty_item> w)
     {
         super(context,0,w);
+        this.context=context;
+
     }
 
     @Override
@@ -32,6 +36,9 @@ public class Faculties_Custom_Adapter extends ArrayAdapter<List_view_faculty_ite
         }
         TextView textView=(TextView)listItemView.findViewById(R.id.faculty_list_view_text_view);
         textView.setText(w.getmName());
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                context.getResources().getDimension(R.dimen.itemattributetextsize));
+        textView.setTextColor(Color.parseColor("#000000"));
         return listItemView;
     }
 }

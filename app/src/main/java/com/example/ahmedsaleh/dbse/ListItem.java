@@ -13,17 +13,19 @@ public class ListItem {
     private String mItemLogo;
     private int mItemId;
     boolean mHasImage;
-    public ListItem(String name, String  logo, int id)
+    private String mType;
+    public ListItem(String name, String  logo, int id,String type)
     {
-        mItemName=name; mItemLogo=logo; mItemId=id; mHasImage=true;
+        mItemName=name; mItemLogo=logo; mItemId=id; mHasImage=true; mType=type;
     }
-    public ListItem(String name,int id)
+    public ListItem(String name,int id,String type)
     {
-        mItemName=name; mItemId=id; mHasImage=false;
+        mItemName=name; mItemId=id; mHasImage=false; mType=type;
     }
     public String getmItemName(){return mItemName;}
     public String getmItemLogo(){return mItemLogo;}
     public int getmItemId(){return mItemId;}
     public boolean getmHasImage(){return mHasImage;}
+    public String getmType(){return mType;}
 
 }

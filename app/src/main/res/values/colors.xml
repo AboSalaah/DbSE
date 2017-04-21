@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="dbsecolor">#89AC08</color>
     <color name="white">#ffff</color>
+    <color name="labelcolor">#6ab7ff</color>
+    <color name="black">#000000</color>
 </resources>
