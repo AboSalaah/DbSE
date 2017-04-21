@@ -1,6 +1,7 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
@@ -43,6 +44,7 @@ public class SingIn extends AppCompatActivity {
     EditText userOrEmail;
     EditText password;
     Button signInButton;
+    Button submitForgetPassword;
     TextView forgotPassword;
     TextView signUpTextView;
     ImageView facebookPage;
@@ -54,7 +56,7 @@ public class SingIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        URL = new StringBuilder("http://2fe2762f.ngrok.io/dbse/public/api/v1/signin");
+        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/signin");
         userOrEmail = (EditText) findViewById(R.id.signIn_user_email);
         password = (EditText) findViewById(R.id.signIn_password);
         signInButton=(Button) findViewById(R.id.sign_in_button);
@@ -89,13 +91,26 @@ public class SingIn extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder=new AlertDialog.Builder(SingIn.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(SingIn.this);
                 View mview=getLayoutInflater().inflate(R.layout.forgot_password_dialog,null);
+                mBuilder.setTitle(R.string.forget_pass_title1);
+                mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                        Toast.makeText(SingIn.this, "Submited", Toast.LENGTH_LONG).show();
+                    }
+                });
+                mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
                 mBuilder.setView(mview);
                 AlertDialog dialog=mBuilder.create();
                 dialog.show();
             }
         });
+
 
     }
 

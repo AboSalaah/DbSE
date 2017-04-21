@@ -1,5 +1,6 @@
 package com.example.ahmedsaleh.dbse;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,36 +36,62 @@ public class SignUp extends AppCompatActivity {
     EditText realname;
     Button createaccount;
     Button nextbutton;
+    Button change;
     CheckBox male;
     CheckBox female;
+    Map<String, String> params;
+
+    String result=null;
+    StringBuilder URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/signup");
         username =(EditText)findViewById(R.id.usernameedittext);
         email =(EditText)findViewById(R.id.emailedittext);
         password =(EditText)findViewById(R.id.passwordedittext);
         realname =(EditText)findViewById(R.id.real_user_name_editText);
         createaccount =(Button) findViewById(R.id.createaccount_button);
         nextbutton =(Button) findViewById(R.id.next_step);
-        male = (CheckBox) findViewById(R.id.male_checkbox) ;
-        female = (CheckBox) findViewById(R.id.female_checkbox) ;
+        change = (Button) findViewById(R.id.chooseSex);
+        male = (CheckBox) findViewById(R.id.male_checkbox);
+        female = (CheckBox) findViewById(R.id.female_checkbox);
+        male.toggle();
+        params = new HashMap<String, String>();
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                male.toggle();
+                female.toggle();
+            }
+        });
+
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate());
+                if(validateOtherData()){
+//                    Toast.makeText(SignUp.this, "Done", Toast.LENGTH_LONG).show();
+                        if(male.isChecked()){
+                            params.put("gender","MALE");
+                        }else{
+                            params.put("gender","FEMALE");
+                        }
+                        params.put("name",realname.getText().toString());
+                        connectToPost();
+                }
             }
         });
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(validate()){
-                    nextbutton.setVisibility(View.INVISIBLE);
-                    createaccount.setVisibility(View.VISIBLE);
-                    realname.setVisibility(View.VISIBLE);
-                    male.setVisibility(View.VISIBLE);
-                    female.setVisibility(View.VISIBLE);
+                    params = new HashMap<String, String>();
+                    params.put("username",username.getText().toString());
+                    params.put("email",email.getText().toString());
+                    params.put("password",password.getText().toString());
+                    connectToPost();
                 }
             }
         });
@@ -94,104 +122,80 @@ public class SignUp extends AppCompatActivity {
     {
         AlertDialog.Builder mBuilder=new AlertDialog.Builder(SignUp.this);
         View mview=getLayoutInflater().inflate(R.layout.codeinputdialog,null);
+        mBuilder.setTitle(R.string.confirmationcode);
+        mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                nextbutton.setVisibility(View.INVISIBLE);
+                createaccount.setVisibility(View.VISIBLE);
+                realname.setVisibility(View.VISIBLE);
+                male.setVisibility(View.VISIBLE);
+                female.setVisibility(View.VISIBLE);
+                change.setVisibility(View.VISIBLE);
+            }
+        });
+        mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
         mBuilder.setView(mview);
         AlertDialog dialog=mBuilder.create();
         dialog.show();
-        Button submitConfirmationCode = (Button)dialog.findViewById(R.id.confirmation_code_Button);
-        submitConfirmationCode.setOnClickListener(new View.OnClickListener() {
+        return true;
+    }
+
+    boolean validateOtherData(){
+        if(realname.getText().toString().isEmpty()){
+            realname.setError("User Name "+(getString(R.string.emptyerror)));
+            return false;
+        }
+        return true;
+    }
+
+    void connectToPost() {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject parameter = new JSONObject(params);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, parameter.toString());
+        Request request = new Request.Builder()
+                .url(URL.toString())
+                .put(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onClick(View view) {
+            public void onFailure(okhttp3.Call call, IOException e) {
+                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
+                Log.v("responsehhhhhhhhh", call.request().body().toString());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, final Response response) throws IOException {
+                result = response.body().string().toString();
+                Log.v("Response code", String.valueOf(response.code()));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            String error = json.get("error").toString();
+                            Toast.makeText(SignUp.this, error, Toast.LENGTH_LONG).show();
+
+                        } catch (JSONException e) {
+                            try {
+                                JSONObject json = new JSONObject(result);
+                                Toast.makeText(SignUp.this,json.get("msg").toString() , Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
+                            } catch (JSONException ex){
+                                ex.printStackTrace();
+                            }
+                        }
+
+                    }
+                });
 
             }
         });
-        return true;
     }
-//    void connectToGet()
-//    {
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url(URL.toString())
-//                .build();
-//
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(okhttp3.Call call, IOException e) {
-//                Log.v("responsehhhhhhhhh", call.request().body().toString());
-//            }
-//
-//            @Override
-//            public void onResponse(okhttp3.Call call, Response response) throws IOException
-//            {
-//                result=response.body().string().toString();
-//                Log.v("Response code", String.valueOf(response.code()));
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run()
-//                    {
-//
-//                        try {
-//                            JSONObject json = new JSONObject(result);
-//                            realName.setText(json.get("name").toString(), TextView.BufferType.EDITABLE);
-//                            userName.setText(json.get("username").toString(), TextView.BufferType.EDITABLE);
-//                            email.setText(json.get("email").toString(), TextView.BufferType.EDITABLE);
-//                            password.setText(json.get("password").toString(), TextView.BufferType.EDITABLE);
-//                            userGender.setText(json.get("gender").toString(), TextView.BufferType.EDITABLE);
-//                        } catch (JSONException e) {
-//
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//
-//            }
-//        });
-//
-//    }
-//    void connectToPost() {
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("username", String.valueOf(userName.getText()));
-//        params.put("email", String.valueOf(email.getText()));
-//        params.put("password", String.valueOf(password.getText()));
-//        params.put("name", String.valueOf(realName.getText()));
-//        params.put("gender", String.valueOf(userGender.getText()));
-//        params.put("id", String.valueOf(SingIn.id));
-//        JSONObject parameter = new JSONObject(params);
-//        OkHttpClient client = new OkHttpClient();
-//        RequestBody body = RequestBody.create(JSON, parameter.toString());
-//        Request request = new Request.Builder()
-//                .url(URL.toString())
-//                .put(body)
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(EditProfile.this, "Connection Failed", Toast.LENGTH_LONG).show();
-//                Log.v("responsehhhhhhhhh", call.request().body().toString());
-//            }
-//
-//            @Override
-//            public void onResponse(okhttp3.Call call, final Response response) throws IOException {
-//                result = response.body().string().toString();
-//                Log.v("Response code", String.valueOf(response.code()));
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            JSONObject json = new JSONObject(result);
-//                            String error = json.get("error").toString();
-//                            Toast.makeText(EditProfile.this, error, Toast.LENGTH_LONG).show();
-//
-//                        } catch (JSONException e) {
-//                            Toast.makeText(EditProfile.this, "Saved", Toast.LENGTH_LONG).show();
-//                            moveToViewProfileActivity();
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                });
-//
-//            }
-//        });
-//    }
 }

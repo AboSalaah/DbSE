@@ -30,6 +30,8 @@
     <string name="emptyerror">Should not be blank</string>
     <string name="confirmationcode">Confirmation Code</string>
     <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="change">change</string>
 
     <!--these strings for Sign in activity-->
     <string name="sign_in_email_hint">E-mail</string>
@@ -41,7 +43,7 @@
     <string name="sign_in_title">Egyptian Universities</string>
     <string name="contacts_text">Contancts</string>
     <string name="facebook">Facebook Page</string>
-    <string name="forget_pass_title1">We will send you a code to conifrm that this account is yours</string>
+    <string name="forget_pass_title1">We will send a new password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

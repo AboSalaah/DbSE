@@ -27,7 +27,7 @@ public class AboutDbSE extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_db_se);
-        URL = new StringBuilder("http://2fe2762f.ngrok.io/dbse/public/api/v1/about");
+        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/about");
         description = (TextView) findViewById(R.id.dbse_description);
         website = (TextView) findViewById(R.id.dbse_website);
         connect();

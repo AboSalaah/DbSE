@@ -48,7 +48,7 @@ public class EditProfile extends AppCompatActivity {
         email = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.new_password);
         userGender = (EditText) findViewById(R.id.user_gender) ;
-        URL = new StringBuilder("http://2fe2762f.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
+        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SingIn.id));
         URL.append(SingIn.token);
         connectToGet();
