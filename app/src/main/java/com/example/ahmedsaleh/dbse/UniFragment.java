@@ -35,6 +35,10 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+/**
+ * Fragment represent list of universities
+ */
 public class UniFragment extends Fragment {
    private Exp_list_Adapter myAdapter;
     private ExpandableListView expandableListView;
@@ -105,7 +109,11 @@ public class UniFragment extends Fragment {
     }
 
 
-
+    /**
+     * Function to make the connection to get the desired unversities data and update the UI
+     * @returns void
+     * @author Ahmed Saleh
+     */
     void connect()
     {
         OkHttpClient client = new OkHttpClient();
@@ -141,22 +149,38 @@ public class UniFragment extends Fragment {
                                 JSONObject uni=universities.getJSONObject(i);
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
-                                String logo=uni.getString("logo");
-                                headers.add(new ListItem(name,logo,id,"university"));
+                                if(uni.getString("logo").contains("storage"))
+                                {
+                                    Log.i("tag","d5ll hnaaaaaaaaaaaaaaaaaaaaaa");
+                                    String logo=getString(R.string.imageurl)+uni.getString("logo");
+                                    headers.add(new ListItem(name,logo,id,"university"));}
+                                else
+                                {
+                                    headers.add(new ListItem(name,id,"university"));
+                                }
                                 JSONArray faculties=uni.getJSONArray("faculties");
                                 for(int j=0;j<faculties.length();++j)
                                 {
                                     JSONObject faculty=faculties.getJSONObject(j);
                                     String facultyname=faculty.getString("name");
-                                    String facultylogo=faculty.getString("logo");
+
                                     int facultyid=faculty.getInt("id");
+                                    if(faculty.getString("logo").contains("storage"))
+                                    {
+
+                                        String facultylogo=getString(R.string.imageurl)+faculty.getString("logo");
                                     childs.add(new ListItem(facultyname,facultylogo,facultyid,"faculty"));
+
+
+                                    }
+                                    else
+                                    {
+                                        childs.add(new ListItem(facultyname,facultyid,"faculty"));
+                                    }
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();
                             }
-
-
                             myAdapter.setAdapter(getActivity(),headers,hashMap);
 
                         } catch (JSONException e) {

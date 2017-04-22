@@ -13,14 +13,22 @@ import java.util.ArrayList;
 
 /**
  * Created by Ahmed Saleh on 4/21/2017.
+ * Custom Adapter Class that extend from PagerAdapter Class to hold Images Urls needed to be shown by ViewPager on University,Institute,Academy or Faculty Profile
+ * @extend PagerAdapter
  */
 public class ImageSliderAdapter extends PagerAdapter {
     private Context ctx;
     private ArrayList<String>sliderimagesUrls;
-    public ImageSliderAdapter(Context ctx,ArrayList<String>imagesid)
+
+    /**
+     * Initialize the Adapter with the ImagesUrls
+     * @param ctx Application Context
+     * @param imagesurls ArrayList that represent ImagesUrls
+     */
+    public ImageSliderAdapter(Context ctx,ArrayList<String>imagesurls)
     {
         this.ctx=ctx;
-        sliderimagesUrls=imagesid;
+        sliderimagesUrls=imagesurls;
     }
     @Override
     public int getCount() {
@@ -52,8 +60,13 @@ public class ImageSliderAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
-    public void setImages(ArrayList<String> images)
+    /**
+     * Function to set ImagesUrls if the images on the UI have been changed
+     * @param imagesurls ArrayList that represent ImagesUrls for the Adapter
+     * @return void
+     */
+    public void setImages(ArrayList<String> imagesurls)
     {
-        sliderimagesUrls=images;
+        sliderimagesUrls=imagesurls;
     }
 }

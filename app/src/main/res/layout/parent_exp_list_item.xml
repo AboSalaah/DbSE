@@ -21,8 +21,6 @@
     <ImageView
         android:layout_width="90dp"
         android:layout_height="90dp"
-
-
         android:id="@+id/parent_exp_list_item_image_view"
 
         />

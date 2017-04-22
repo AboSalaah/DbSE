@@ -6,8 +6,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -61,6 +64,8 @@ public class University_Profile extends AppCompatActivity {
         url.append(itemType+"/"+itemId+"?token="+getString(R.string.token));
         Log.i("University_Profile","el typeeeee "+itemType);
         Log.i("University_Profile","el id "+itemId);
+        TextView locationonamp=(TextView)findViewById(R.id.uni_profile_location_on_map);
+        locationonamp.setTextColor(Color.parseColor(getString(R.string.colorforfacultieslist)));
 
         // this part will be deleted
         nedeedpadding=QueryUtils.getDppixels(this,5);
@@ -282,9 +287,9 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView itemnamelabel = (TextView) findViewById(R.id.uni_profile_name_label);
                             TextView itemname = (TextView) findViewById(R.id.uni_profile_name);
-                            if(jsonObject1.has("name")) {
-                                itemnamelabel.setText("Name");
+                            if(jsonObject1.has("name")&&!jsonObject1.getString("name").equals("null")) {
 
+                                itemnamelabel.setText("Name");
                                 String name = jsonObject1.getString("name");
                                 itemname.setText(name);
                             }
@@ -299,14 +304,9 @@ public class University_Profile extends AppCompatActivity {
 
 
                             ImageView imageView2=(ImageView)findViewById(R.id.uni_profile_logo);
-                            if(jsonObject1.has("logo")) {
-                                String logourl = jsonObject1.getString("logo");
-                                if (!logourl.equals("null")) {
-
-                                    Picasso.with(getApplicationContext()).load(logourl).into(imageView2);
-                                } else {
-                                    imageView2.setVisibility(View.GONE);
-                                }
+                            if(jsonObject1.has("logo")&&!jsonObject1.getString("logo").equals("null")&&jsonObject1.getString("logo").contains("storage")) {
+                                String logourl = getString(R.string.imageurl)+jsonObject1.getString("logo");
+                                Picasso.with(getApplicationContext()).load(logourl).into(imageView2);
                             }
                             else
                             {
@@ -369,11 +369,10 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView discriptionlable = (TextView) findViewById(R.id.uni_profile_discreption_label);
                             TextView discription = (TextView) findViewById(R.id.uni_profile_discreption);
-                            if(jsonObject1.has("description")) {
+                            if(jsonObject1.has("description")&&!jsonObject1.getString("description").equals("null")) {
 
                                discriptionlable.setText("Discreption");
                                 String descreption = jsonObject1.getString("description");
-
                                discription.setText(descreption);
                             }
                             else
@@ -384,7 +383,7 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView citylable=(TextView)findViewById(R.id.uni_profile_city_label);
                             TextView cityy=(TextView)findViewById(R.id.uni_profile_city);
-                            if(jsonObject1.has("city")) {
+                            if(jsonObject1.has("city")&&!jsonObject1.getString("city").equals("null")) {
                                 citylable.setText("City");
                                 String city = jsonObject1.getString("city");
                                cityy.setText(city);
@@ -400,9 +399,8 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView contactslable=(TextView)findViewById(R.id.uni_profile_contacts_label);
                             TextView contactss=(TextView)findViewById(R.id.uni_profile_contacts);
-                            if(jsonObject1.has("contacts")) {
+                            if(jsonObject1.has("contacts")&&!jsonObject1.getString("contacts").equals("null")) {
                                 contactslable.setText("Contacts");
-
                                 String contacts = jsonObject1.getString("contacts");
                                 contactss.setText(QueryUtils.parser(contacts));
                             }
@@ -416,7 +414,7 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView websiteurllabel=(TextView)findViewById(R.id.uni_profile_website_label);
                             TextView  websiteurll=(TextView)findViewById(R.id.uni_profile_website);
-                            if(jsonObject1.has("website_url")) {
+                            if(jsonObject1.has("website_url")&&!jsonObject1.getString("website_url").equals("null")) {
                                 websiteurllabel.setText("Website");
 
                                 String websiteurl = jsonObject1.getString("website_url");
@@ -430,19 +428,24 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView facebookpagelable=(TextView)findViewById(R.id.uni_profile_facebookpage_label);
                             TextView facebookpagee=(TextView)findViewById(R.id.uni_profile_facebookpage);
-                            if(jsonObject1.has("facebook_page")) {
+                            if(jsonObject1.has("facebook_page")&&!jsonObject1.getString("facebook_page").equals("null")) {
                                 facebookpagelable.setText("Facebook");
 
                                 String facebookpage = jsonObject1.getString("facebook_page");
 
                                 facebookpagee.setText(facebookpage);
                             }
+                            else
+                            {
+                                facebookpagelable.setVisibility(View.GONE);
+                                facebookpagee.setVisibility(View.GONE);
+                            }
 
 
 
                             TextView locationlabel=(TextView)findViewById(R.id.uni_profile_location_label);
                             TextView locationn=(TextView)findViewById(R.id.uni_profile_location);
-                            if(jsonObject1.has("location")) {
+                            if(jsonObject1.has("location")&&!jsonObject1.getString("location").equals("null")) {
                                 locationlabel.setText("Location");
 
                                 String location = jsonObject1.getString("location");
@@ -458,7 +461,7 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView presidentlable=(TextView)findViewById(R.id.uni_profile_president_label);
                             TextView presidentt=(TextView)findViewById(R.id.uni_profile_presedent);
-                                 if(jsonObject1.has("president_name")) {
+                                 if(jsonObject1.has("president_name")&&!jsonObject1.getString("president_name").equals("null")) {
                                     presidentlable.setText("President");
                                      String president = jsonObject1.getString("president_name");
 
@@ -474,7 +477,7 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView ranklabel=(TextView)findViewById(R.id.uni_profile_tsnef_label);
                             TextView rankk=(TextView)findViewById(R.id.uni_profile_tsnef);
-                            if(jsonObject1.has("rank")) {
+                            if(jsonObject1.has("rank")&&!jsonObject1.getString("rank").equals("null")) {
                                 ranklabel.setText("Rank");
 
                                 String rank = jsonObject1.getString("rank");
@@ -492,7 +495,7 @@ public class University_Profile extends AppCompatActivity {
 
                                 TextView pastpresidentlable=(TextView)findViewById(R.id.uni_profile_past_presedent_label);
                             TextView pastpresidnet=(TextView)findViewById(R.id.uni_profile_past_presedent);
-                            if(jsonObject1.has("past_presidents")) {
+                            if(jsonObject1.has("past_presidents")&&!jsonObject1.getString("past_presidents").equals("null")) {
                                pastpresidentlable.setText("Past_President");
 
                                 String past_presidents = jsonObject1.getString("past_presidents");
@@ -507,18 +510,13 @@ public class University_Profile extends AppCompatActivity {
 
                             TextView feeslabel=(TextView)findViewById(R.id.uni_profile_fees_label);
                             TextView feess=(TextView)findViewById(R.id.faculty_profile_fees);
-                            if(jsonObject1.has("fees")) {
+                            if(jsonObject1.has("fees")&&!jsonObject1.getString("fees").equals("null")) {
                                 String fees = jsonObject1.getString("fees");
 
-                                if (!fees.equals("null")) {
                                     feeslabel.setText("Fees");
 
                                     feess.setText(fees);
 
-                                } else {
-                                    feeslabel.setVisibility(View.GONE);
-                                    feess.setVisibility(View.GONE);
-                                }
                             }
                             else
                             {
@@ -529,7 +527,7 @@ public class University_Profile extends AppCompatActivity {
 
                                 TextView deplable=(TextView)findViewById(R.id.faculty_profile_department_label);
                             TextView deb=(TextView)findViewById(R.id.faculty_profile_department);
-                            if(jsonObject1.has("departments")) {
+                            if(jsonObject1.has("departments")&&!jsonObject1.getString("departments").equals("null")) {
                                 deplable.setText("Departments");
 
                                 String departments = jsonObject1.getString("departments");
@@ -541,33 +539,23 @@ public class University_Profile extends AppCompatActivity {
                                 deb.setVisibility(View.GONE);
                                 deplable.setVisibility(View.GONE);
                             }
-                            if(jsonObject1.has("x"))
+                            if(jsonObject1.has("x")&&!jsonObject1.getString("x").equals("null")&&jsonObject1.has("y")&&!jsonObject1.getString("y").equals("null"))
                             {
                                 lat=jsonObject1.getDouble("x");
-                            }
-                            if(jsonObject1.has("y"))
-                            {
                                 lon=jsonObject1.getDouble("y");
                             }
 
-
                             TextView otherslabel=(TextView)findViewById(R.id.uni_profile_others_label);
                             TextView otherss=(TextView)findViewById(R.id.uni_profile_others);
-                            if(jsonObject1.has("others")) {
+                            if(jsonObject1.has("others")&&!jsonObject1.getString("others").equals("null")) {
                                 String others = jsonObject1.getString("others");
 
-                                if (!others.equals("null")) {
+
 
                                    otherslabel.setText("Others");
 
-
                                     otherss.setText(QueryUtils.parser(others));
 
-
-                                } else {
-                                    otherss.setVisibility(View.GONE);
-                                    otherslabel.setVisibility(View.GONE);
-                                }
                             }
                             else
                             {
@@ -576,7 +564,7 @@ public class University_Profile extends AppCompatActivity {
                             }
 
                              TextView facultieslabel=(TextView)findViewById(R.id.uni_profile_faculties_list_view_label);
-                            if(jsonObject.has("faculties")) {
+                            if(jsonObject.has("faculties")&&jsonObject.getJSONArray("faculties").length()!=0) {
                                 String type;
                                 if (itemType.equals("university")) type = "faculty";
                                 else type = "acadfaculty";

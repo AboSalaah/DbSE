@@ -22,6 +22,10 @@ import java.util.List;
 /**
  * Created by Ahmed Saleh on 4/19/2017.
  */
+
+/**
+ * Class contains all utility function needed
+ */
 public class QueryUtils {
 
    public static Bitmap converttobitmap(String logo)
@@ -31,12 +35,24 @@ public class QueryUtils {
         return decodedByte;
     }
 
+    /**
+     * Function that convert an integer to number of Dp pixles
+     * @param context Application Context
+     * @param size integer number to be converted
+     * @return int number of Dp pixels
+     */
     public static int getDppixels(Context context,int size)
     {
         float scale = context.getResources().getDisplayMetrics().density;
         int dpAsPixels = (int) (size*scale + 0.5f);
         return dpAsPixels;
     }
+
+    /**
+     * Function that take String contains multible items seperated with slash and parse it
+     * @param s String to parse
+     * @return String
+     */
     public static String parser(String s)
     {
         Log.i("tag","el string hwa "+s);
@@ -61,6 +77,16 @@ public class QueryUtils {
             return null;
         }
     }
+
+    /**
+     * function that send an intent to show geographical coordinates
+     * it allows to show geographical coordinates from maps app or browser
+     * @param ctx application context
+     * @param lat latitude
+     * @param longt longitude
+     * @param location name of the location with this latitude and longitude
+     *
+     */
     public static void showLocationOnMap(Context ctx,double lat,double longt,String location) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("http://maps.google.com/maps?q=loc:" + lat + "," + longt+" ("+location+")"));

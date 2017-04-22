@@ -27,6 +27,10 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+/**
+ * Fragment that shows Institues list and thier Dapartments using ExpandableListView and Exp_list_Adapter
+ */
 public class InstitutesFragment extends Fragment {
 
     private Exp_list_Adapter myAdapter;
@@ -92,11 +96,16 @@ public class InstitutesFragment extends Fragment {
         url.setLength(0);
         url.append(getString(R.string.url)+"institute"+"?token="+getString(R.string.token));
         Log.i("tag","instituteurl  "+url.toString());
-       // connect();
+        connect();
 
 
     }
 
+    /**
+     * Function to make the connection to get the desired acamdemies and update the UI
+     * @author Ahmed Saleh
+     * @return void
+     */
     void connect()
     {
         OkHttpClient client = new OkHttpClient();

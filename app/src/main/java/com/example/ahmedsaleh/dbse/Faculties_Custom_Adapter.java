@@ -16,12 +16,20 @@ import java.util.ArrayList;
 
 /**
  * Created by Ahmed Saleh on 4/20/2017.
+ * Custom Adapter Class that extends from ArrayAdapter Class to hold the data needed for ListView that show Faculties for Universities and Academies Profile
+ * extend ArrayAdapter<List_view_faculty_item>
  */
 public class Faculties_Custom_Adapter extends ArrayAdapter<List_view_faculty_item> {
     private Context context;
-    public Faculties_Custom_Adapter(Context context, ArrayList<List_view_faculty_item> w)
+
+    /**
+     * Inialize the Adapter with the list of data
+     * @param context Application Context
+     * @param facutlies ArrayList that represent the data
+     */
+    public Faculties_Custom_Adapter(Context context, ArrayList<List_view_faculty_item> facutlies)
     {
-        super(context,0,w);
+        super(context,0,facutlies);
         this.context=context;
 
     }
@@ -38,7 +46,9 @@ public class Faculties_Custom_Adapter extends ArrayAdapter<List_view_faculty_ite
         textView.setText(w.getmName());
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 context.getResources().getDimension(R.dimen.itemattributetextsize));
-        textView.setTextColor(Color.parseColor("#000000"));
+        textView.setTextColor(Color.parseColor(context.getString(R.string.colorforfacultieslist)));
+        int neededpadding=QueryUtils.getDppixels(context,35);
+        textView.setPadding(0,neededpadding,0,neededpadding);
         return listItemView;
     }
 }

@@ -27,6 +27,10 @@ import okhttp3.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+/**
+ * Fragment represent list of academies
+ */
 public class AcademiesFragment extends Fragment {
     private Exp_list_Adapter myAdapter;
     private ExpandableListView expandableListView;
@@ -91,13 +95,17 @@ public class AcademiesFragment extends Fragment {
         url.setLength(0);
         url.append(getString(R.string.url)+"academy"+"?token="+getString(R.string.token));
         Log.i("tag","academiesurl  "+url.toString());
-         //connect();
+         connect();
 
 
 
     }
 
-
+    /**
+     * Function to make the connection to get the desired acamdemies and update the UI
+     *
+     * @return void
+     */
     void connect()
     {
         OkHttpClient client = new OkHttpClient();
@@ -133,16 +141,30 @@ public class AcademiesFragment extends Fragment {
                                 JSONObject uni=universities.getJSONObject(i);
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
-                                String logo=uni.getString("logo");
-                                headers.add(new ListItem(name,logo,id,"academy"));
+                                if(!uni.getString("logo").equals("null")&&uni.getString("logo").contains("storage"))
+                                {
+                                    String logo=getString(R.string.imageurl)+uni.getString("logo");
+                                      headers.add(new ListItem(name,logo,id,"academy"));
+
+                                }
+                                else
+                                {
+                                    headers.add(new ListItem(name,id,"academy"));
+                                }
                                 JSONArray faculties=uni.getJSONArray("faculties");
                                 for(int j=0;j<faculties.length();++j)
                                 {
                                     JSONObject faculty=faculties.getJSONObject(j);
                                     String facultyname=faculty.getString("name");
-                                    String facultylogo=faculty.getString("logo");
                                     int facultyid=faculty.getInt("id");
-                                    childs.add(new ListItem(facultyname,facultylogo,facultyid,"acadfaculty"));
+                                    if(!faculty.getString("logo").equals("null")&&uni.getString("logo").contains("storage")) {
+                                        String facultylogo =getString(R.string.imageurl)+faculty.getString("logo");
+                                        childs.add(new ListItem(facultyname, facultylogo, facultyid, "acadfaculty"));
+                                    }
+                                    else
+                                    {
+                                        childs.add(new ListItem(facultyname,facultyid,"acadfaculty"));
+                                    }
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();

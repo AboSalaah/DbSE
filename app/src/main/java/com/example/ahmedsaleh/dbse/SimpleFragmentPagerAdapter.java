@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Created by Ahmed Saleh on 4/13/2017.
+ * Custom Adapter Class that extend from FragmentPagerAdapter Class to hold the fragments to be shown by view pager
+ * @extend FragmentPagerAdapter
  */
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
