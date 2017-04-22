@@ -56,7 +56,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
     @Override
     public Object getGroup(int groupPosition) {
 
-            return header_titles.get(groupPosition);
+        return header_titles.get(groupPosition);
     }
 
     @Override
