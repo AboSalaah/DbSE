@@ -45,6 +45,7 @@ public class SingIn extends AppCompatActivity {
     EditText password;
     Button signInButton;
     Button submitForgetPassword;
+    EditText emailForgetPassword;
     TextView forgotPassword;
     TextView signUpTextView;
     ImageView facebookPage;
@@ -56,7 +57,6 @@ public class SingIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/signin");
         userOrEmail = (EditText) findViewById(R.id.signIn_user_email);
         password = (EditText) findViewById(R.id.signIn_password);
         signInButton=(Button) findViewById(R.id.sign_in_button);
@@ -66,7 +66,7 @@ public class SingIn extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signin");
                 if(validate()){
                     connect();
                 }
@@ -92,12 +92,14 @@ public class SingIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(SingIn.this);
-                View mview=getLayoutInflater().inflate(R.layout.forgot_password_dialog,null);
+                final View mview=getLayoutInflater().inflate(R.layout.forgot_password_dialog,null);
                 mBuilder.setTitle(R.string.forget_pass_title1);
                 mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-                        Toast.makeText(SingIn.this, "Submited", Toast.LENGTH_LONG).show();
+                        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/forgetpassword");
+                        emailForgetPassword = (EditText) mview.findViewById(R.id.forget_password_code_editText);
+                        connectForgetPassword();
                     }
                 });
                 mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -169,6 +171,50 @@ public class SingIn extends AppCompatActivity {
         }
     }
 
+    void connectForgetPassword(){
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        Map<String, String> params = new HashMap<String, String>();
+        JSONObject parameter = new JSONObject(params);
+
+        params.put("email",emailForgetPassword.getText().toString());
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, parameter.toString());
+        Request request = new Request.Builder()
+                .url(URL.toString())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+//                Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+                Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, final Response response) throws IOException {
+                result = response.body().string().toString();
+                Log.v("Response code", String.valueOf(response.code()));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            String msg = json.get("msg").toString();
+                            Toast.makeText(SingIn.this,msg, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            Toast.makeText(SingIn.this,"The selected email is invalid!", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+//        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+    }
+
     void connect()
     {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -185,9 +231,9 @@ public class SingIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
-                Log.v("error",e.toString());
+                e.printStackTrace();
+//                Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -199,20 +245,24 @@ public class SingIn extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(result);
-                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-                                    .putString("token", json.getString("token")).commit();
-                            token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                                    .getString("token", "defaultStringIfNothingFound");
-                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-                                    .putString("id", json.getString("id")).commit();
-                            id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                                    .getString("id", "defaultStringIfNothingFound"));
                             String error = json.get("error").toString();
-//                                    Toast.makeText(SingIn.this,error, Toast.LENGTH_LONG).show();
-//                                    moveToSignUpActivity();
+                            Toast.makeText(SingIn.this,error, Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
-                            moveToUniversitiesActivity();
                             e.printStackTrace();
+                            try {
+                                JSONObject json = new JSONObject(result);
+                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+                                        .putString("token", json.getString("token")).commit();
+                                token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                        .getString("token", "defaultStringIfNothingFound");
+                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+                                        .putString("id", json.getString("id")).commit();
+                                id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                        .getString("id", "defaultStringIfNothingFound"));
+                                moveToUniversitiesActivity();
+                            } catch (JSONException ex){
+                                ex.printStackTrace();
+                            }
                         }
 
                     }

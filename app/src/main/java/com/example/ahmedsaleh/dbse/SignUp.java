@@ -1,11 +1,15 @@
 package com.example.ahmedsaleh.dbse;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,25 +41,34 @@ public class SignUp extends AppCompatActivity {
     Button createaccount;
     Button nextbutton;
     Button change;
+    EditText confirmCodeEditText;
     CheckBox male;
     CheckBox female;
     Map<String, String> params;
+    String confirmCode;
 
     String result=null;
     StringBuilder URL;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/signup");
+
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signupverify");
         username =(EditText)findViewById(R.id.usernameedittext);
         email =(EditText)findViewById(R.id.emailedittext);
         password =(EditText)findViewById(R.id.passwordedittext);
         realname =(EditText)findViewById(R.id.real_user_name_editText);
         createaccount =(Button) findViewById(R.id.createaccount_button);
         nextbutton =(Button) findViewById(R.id.next_step);
-        change = (Button) findViewById(R.id.chooseSex);
+        change = (Button) findViewById(R.id.chooseGender);
         male = (CheckBox) findViewById(R.id.male_checkbox);
         female = (CheckBox) findViewById(R.id.female_checkbox);
         male.toggle();
@@ -73,12 +86,18 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 if(validateOtherData()){
 //                    Toast.makeText(SignUp.this, "Done", Toast.LENGTH_LONG).show();
+                    URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signup");
+                    params = new HashMap<String, String>();
+                    params.put("username",username.getText().toString());
+                    params.put("email",email.getText().toString());
+                    params.put("password",password.getText().toString());
                         if(male.isChecked()){
                             params.put("gender","MALE");
                         }else{
                             params.put("gender","FEMALE");
                         }
                         params.put("name",realname.getText().toString());
+                        params.put("type","VISITOR");
                         connectToPost();
                 }
             }
@@ -91,7 +110,7 @@ public class SignUp extends AppCompatActivity {
                     params.put("username",username.getText().toString());
                     params.put("email",email.getText().toString());
                     params.put("password",password.getText().toString());
-                    connectToPost();
+                    connectToPostVerify();
                 }
             }
         });
@@ -115,23 +134,31 @@ public class SignUp extends AppCompatActivity {
             password.setError("password "+getString(R.string.emptyerror));
             return false;
         }
-        if(!verifyemail())return false;
         return true;
     }
-    boolean verifyemail()
+    void verifyemail()
     {
-        AlertDialog.Builder mBuilder=new AlertDialog.Builder(SignUp.this);
-        View mview=getLayoutInflater().inflate(R.layout.codeinputdialog,null);
+
+        final AlertDialog.Builder mBuilder=new AlertDialog.Builder(SignUp.this);
+        final View mview=getLayoutInflater().inflate(R.layout.codeinputdialog,null);
         mBuilder.setTitle(R.string.confirmationcode);
         mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+
+            @Override
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
-                nextbutton.setVisibility(View.INVISIBLE);
-                createaccount.setVisibility(View.VISIBLE);
-                realname.setVisibility(View.VISIBLE);
-                male.setVisibility(View.VISIBLE);
-                female.setVisibility(View.VISIBLE);
-                change.setVisibility(View.VISIBLE);
+                // User clicked OK butt
+                confirmCodeEditText = (EditText) mview.findViewById(R.id.confirmation_code_editText);
+                String mystr = confirmCodeEditText.getText().toString();
+                if(mystr.equals(confirmCode)) {
+                    nextbutton.setVisibility(View.INVISIBLE);
+                    createaccount.setVisibility(View.VISIBLE);
+                    realname.setVisibility(View.VISIBLE);
+                    male.setVisibility(View.VISIBLE);
+                    female.setVisibility(View.VISIBLE);
+                    change.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(SignUp.this, "Wrong Code", Toast.LENGTH_LONG).show();
+                }
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -142,7 +169,6 @@ public class SignUp extends AppCompatActivity {
         mBuilder.setView(mview);
         AlertDialog dialog=mBuilder.create();
         dialog.show();
-        return true;
     }
 
     boolean validateOtherData(){
@@ -153,20 +179,21 @@ public class SignUp extends AppCompatActivity {
         return true;
     }
 
-    void connectToPost() {
+    void connectToPostVerify() {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject parameter = new JSONObject(params);
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, parameter.toString());
         Request request = new Request.Builder()
                 .url(URL.toString())
-                .put(body)
+                .post(body)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
+//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
             }
 
             @Override
@@ -179,17 +206,54 @@ public class SignUp extends AppCompatActivity {
 
                         try {
                             JSONObject json = new JSONObject(result);
-                            String error = json.get("error").toString();
-                            Toast.makeText(SignUp.this, error, Toast.LENGTH_LONG).show();
+                            confirmCode = json.get("code").toString();
+                            Toast.makeText(SignUp.this, json.get("msg").toString(), Toast.LENGTH_LONG).show();
+                            verifyemail();
 
                         } catch (JSONException e) {
-                            try {
-                                JSONObject json = new JSONObject(result);
-                                Toast.makeText(SignUp.this,json.get("msg").toString() , Toast.LENGTH_LONG).show();
-                                e.printStackTrace();
-                            } catch (JSONException ex){
-                                ex.printStackTrace();
-                            }
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    void connectToPost() {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject parameter = new JSONObject(params);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, parameter.toString());
+        Request request = new Request.Builder()
+                .url(URL.toString())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
+                Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, final Response response) throws IOException {
+                result = response.body().string().toString();
+                Log.v("Response code", String.valueOf(response.code()));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            String msg = json.get("msg").toString();
+                            Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
+                            moveTaskToBack(true);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                     }

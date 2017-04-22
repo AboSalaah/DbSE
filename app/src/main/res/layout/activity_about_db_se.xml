@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ahmedsaleh.dbse.AboutDbSE">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -13,24 +13,32 @@
             android:id="@+id/dbse_description_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="25sp"
             android:text="Who are we ?"
             android:textColor="@color/DarkBlack"
             />
         <TextView
             android:id="@+id/dbse_description"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/dbse_description_title"
             android:textColor="@color/gray"/>
         <TextView
             android:id="@+id/website_textview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/dbse_description"
+            android:textSize="25sp"
             android:text="Our Website"
             android:textColor="@color/DarkBlack"/>
         <TextView
             android:id="@+id/dbse_website"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/website_textview"
             android:textColor="@color/gray"/>
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

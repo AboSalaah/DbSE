@@ -1,7 +1,10 @@
 package com.example.ahmedsaleh.dbse;
 
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -23,11 +26,20 @@ public class AboutDbSE extends AppCompatActivity {
     String result=null;
     StringBuilder URL;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_db_se);
-        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/about");
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+
+        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/about");
         description = (TextView) findViewById(R.id.dbse_description);
         website = (TextView) findViewById(R.id.dbse_website);
         connect();
@@ -44,6 +56,7 @@ public class AboutDbSE extends AppCompatActivity {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
             }
 
             @Override

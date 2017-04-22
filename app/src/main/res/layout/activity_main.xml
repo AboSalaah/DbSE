@@ -25,7 +25,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/signinlinearlayout"
             android:layout_centerHorizontal="true"
@@ -34,7 +34,7 @@
             <EditText
                 style="@style/edittext_sign_in_up_style"
                 android:id="@+id/signIn_user_email"
-                android:hint="@string/sign_in_email_hint"/>
+                android:hint="@string/emailORusername"/>
             <EditText
                 style="@style/edittext_sign_in_up_style"
                 android:id="@+id/signIn_password"
@@ -54,14 +54,17 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_below="@+id/signinlinearlayout">
-            <CheckBox
-                android:id="@+id/remember_me"
+            <TextView
+                android:id="@+id/SignIn_SignUp_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/remember_me"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:paddingLeft="32dp"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sign_up"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:clickable="true"/>
             <TextView
                 android:id="@+id/forget_password"
@@ -69,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_alignParentRight="true"
+                android:paddingRight="32dp"
                 android:clickable="true"
                 android:text="@string/froget_pass"
                 android:textColor="@color/white"
@@ -77,24 +81,13 @@
         <ImageView
             android:id="@+id/Facebook_Button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@mipmap/ic_facebook"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/forget_password_linearlayout"
-            android:layout_marginTop="@dimen/fab_margin"
+            android:layout_marginTop="64dp"
+            android:layout_alignParentBottom="true"
             android:background="@color/dbsecolor"
             android:clickable="true"/>
-        <TextView
-            android:id="@+id/SignIn_SignUp_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:text="@string/sign_up"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:clickable="true"
-            android:layout_below="@+id/Facebook_Button"/>
     </RelativeLayout>
 </ScrollView>

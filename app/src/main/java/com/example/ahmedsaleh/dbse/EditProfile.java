@@ -3,10 +3,14 @@ package com.example.ahmedsaleh.dbse;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,18 +41,39 @@ public class EditProfile extends AppCompatActivity {
     EditText userName;
     EditText email;
     EditText password;
-    EditText userGender;
+    CheckBox male;
+    CheckBox female;
+    Button changeGenderButton;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         realName = (EditText) findViewById(R.id.real_user_name);
         userName = (EditText) findViewById(R.id.new_username);
         email = (EditText) findViewById(R.id.new_email);
         password = (EditText) findViewById(R.id.new_password);
-        userGender = (EditText) findViewById(R.id.user_gender) ;
-        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
+        male = (CheckBox) findViewById(R.id.male_checkbox_editProfile) ;
+        female = (CheckBox) findViewById(R.id.female_checkbox_editProfile) ;
+        changeGenderButton = (Button) findViewById(R.id.chooseGender_editProfile) ;
+        changeGenderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(male.isChecked()|| female.isChecked()){
+                    male.toggle();
+                    female.toggle();
+                } else {
+                    male.toggle();
+                }
+            }
+        });
+        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SingIn.id));
         URL.append(SingIn.token);
         connectToGet();
@@ -90,7 +115,12 @@ public class EditProfile extends AppCompatActivity {
                             userName.setText(json.get("username").toString(), TextView.BufferType.EDITABLE);
                             email.setText(json.get("email").toString(), TextView.BufferType.EDITABLE);
                             password.setText(json.get("password").toString(), TextView.BufferType.EDITABLE);
-                            userGender.setText(json.get("gender").toString(), TextView.BufferType.EDITABLE);
+                            String gender = json.get("gender").toString();
+                            if(gender.equals("MALE")){
+                                male.toggle();
+                            } else {
+                                female.toggle();
+                            }
                         } catch (JSONException e) {
 
                             e.printStackTrace();
@@ -109,7 +139,11 @@ public class EditProfile extends AppCompatActivity {
         params.put("email", String.valueOf(email.getText()));
         params.put("password", String.valueOf(password.getText()));
         params.put("name", String.valueOf(realName.getText()));
-        params.put("gender", String.valueOf(userGender.getText()));
+        if(male.isChecked()){
+            params.put("gender","MALE");
+        } else {
+            params.put("gender","FEMALE");
+        }
         params.put("id", String.valueOf(SingIn.id));
         JSONObject parameter = new JSONObject(params);
         OkHttpClient client = new OkHttpClient();
@@ -121,8 +155,9 @@ public class EditProfile extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-                Toast.makeText(EditProfile.this, "Connection Failed", Toast.LENGTH_LONG).show();
+//                Toast.makeText(EditProfile.this, "Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
             }
 
             @Override
@@ -140,6 +175,7 @@ public class EditProfile extends AppCompatActivity {
                         } catch (JSONException e) {
                             Toast.makeText(EditProfile.this, "Saved", Toast.LENGTH_LONG).show();
                             moveToViewProfileActivity();
+                            finish();
                             e.printStackTrace();
                         }
 

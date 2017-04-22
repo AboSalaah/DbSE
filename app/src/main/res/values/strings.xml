@@ -8,6 +8,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Sign Out</string>
     <string name="register1">Create your</string>
     <string name="register2">account!</string>
     <!--these strings define hints for edit texts in singup form-->
@@ -44,6 +45,7 @@
     <string name="contacts_text">Contancts</string>
     <string name="facebook">Facebook Page</string>
     <string name="forget_pass_title1">We will send a new password</string>
+    <string name="emailORusername">UserName or e-mail</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

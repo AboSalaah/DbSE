@@ -1,8 +1,11 @@
 package com.example.ahmedsaleh.dbse;
 
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -21,14 +24,23 @@ import okhttp3.Response;
 
 public class ViewProfile extends AppCompatActivity {
 
+    TextView firstLetter;
     String result=null;
     StringBuilder URL;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        URL = new StringBuilder("http://a3534e47.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+        firstLetter = (TextView) findViewById(R.id.View_Profile_textincircle);
+        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
         URL.append(SingIn.token);
         connect();
     }
@@ -44,6 +56,7 @@ public class ViewProfile extends AppCompatActivity {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
+                e.printStackTrace();
             }
 
             @Override
@@ -57,10 +70,15 @@ public class ViewProfile extends AppCompatActivity {
                     {
                         try {
                             JSONObject json =new JSONObject(result);
-                            TextView username = (TextView) findViewById(R.id.View_Profile_username_header);
-                            username.setText(json.getString("name"));
-                            TextView mail = (TextView) findViewById(R.id.email_header);
+                            TextView name = (TextView) findViewById(R.id.View_Profile_username_header);
+                            name.setText(json.getString("name"));
+                            TextView mail = (TextView) findViewById(R.id.View_Profile_email_header);
                             mail.setText(json.getString("email"));
+                            firstLetter.setText(String.valueOf(Character.toUpperCase(json.getString("name").charAt(0))));
+                            TextView username = (TextView) findViewById(R.id.username_viewprofile2);
+                            username.setText(json.get("username").toString());
+                            TextView gender = (TextView) findViewById(R.id.Gender_viewprofile2);
+                            gender.setText(json.get("gender").toString());
                         } catch (JSONException e) {
 
                             e.printStackTrace();
