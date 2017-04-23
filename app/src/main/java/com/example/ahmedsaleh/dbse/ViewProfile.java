@@ -27,22 +27,18 @@ public class ViewProfile extends AppCompatActivity {
     TextView firstLetter;
     String result=null;
     StringBuilder URL;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
 
 
         firstLetter = (TextView) findViewById(R.id.View_Profile_textincircle);
         URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
         URL.append(SingIn.token);
-        connect();
+//        connect();
     }
 
     void connect()

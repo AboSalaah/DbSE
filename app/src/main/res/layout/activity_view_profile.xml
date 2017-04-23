@@ -35,8 +35,8 @@
         android:id="@+id/username_viewprofile_Relative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email_header"
-        android:orientation="horizontal"
+        android:layout_below="@+id/View_Profile_email_header"
+        android:orientation="vertical"
         android:layout_centerHorizontal="true">
     <TextView
         android:id="@+id/username_viewprofile1"
@@ -48,27 +48,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/username_viewprofile1"
-        android:paddingLeft="8dp"
-        />
+        android:paddingLeft="8dp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username_viewprofile_Relative"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true">
-        <TextView
-            android:id="@+id/Gender_viewprofile1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender"/>
-        <TextView
-            android:id="@+id/Gender_viewprofile2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/Gender_viewprofile1"
-            android:paddingLeft="8dp"
-            />
+    <TextView
+        android:id="@+id/Gender_viewprofile1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"/>
+    <TextView
+        android:id="@+id/Gender_viewprofile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Gender_viewprofile1"
+        android:paddingLeft="8dp"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -1,14 +1,17 @@
 package com.example.ahmedsaleh.dbse;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
@@ -21,8 +24,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import static com.example.ahmedsaleh.dbse.SingIn.openBbSE_FacebookPage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TabLayout tabs;
@@ -88,7 +94,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        if(id == R.id.Home_icon){
+                moveToUniveristies();
+        }
         if(id == R.id.Edit_profile){
             moveToEditProfileActiviy();
         }
@@ -102,9 +110,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             movToSignInActivity();
             finish();
         }
+        if(id == R.id.Contacts){
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+            final View mview=getLayoutInflater().inflate(R.layout.contacts_dialog,null);
+            mBuilder.setTitle(R.string.contacts_text);
+            mBuilder.setView(mview);
+            mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+            AlertDialog dialog=mBuilder.create();
+            dialog.show();
+
+            ImageView facbookpage = (ImageView) mview.findViewById(R.id.Facebook_dialog);
+            facbookpage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent facebookIntent = openBbSE_FacebookPage(MainActivity.this);
+                    Intent chooser = Intent.createChooser(facebookIntent,"Open By");
+                    startActivity(chooser);
+                }
+            });
+            TextView DbSE = (TextView) mview.findViewById(R.id.Dbse_dialog);
+            DbSE.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent DbSE_Intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.dbse.co/universities"));
+                    Intent chooser = Intent.createChooser(DbSE_Intent,"Open By");
+                    startActivity(chooser);
+                }
+            });
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void moveToUniveristies() {
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
     }
 
     private void moveToViewProfileActiviy() {

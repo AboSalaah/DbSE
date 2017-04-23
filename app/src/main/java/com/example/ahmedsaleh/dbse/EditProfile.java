@@ -45,15 +45,11 @@ public class EditProfile extends AppCompatActivity {
     CheckBox female;
     Button changeGenderButton;
 
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         realName = (EditText) findViewById(R.id.real_user_name);
         userName = (EditText) findViewById(R.id.new_username);
@@ -76,12 +72,12 @@ public class EditProfile extends AppCompatActivity {
         URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SingIn.id));
         URL.append(SingIn.token);
-        connectToGet();
+//        connectToGet();
         Button saveButton = (Button) findViewById(R.id.Save_changes_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connectToPost();
+//                connectToPost();
             }
         });
     }

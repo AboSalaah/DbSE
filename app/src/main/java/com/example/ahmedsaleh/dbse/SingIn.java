@@ -44,7 +44,6 @@ public class SingIn extends AppCompatActivity {
     EditText userOrEmail;
     EditText password;
     Button signInButton;
-    Button submitForgetPassword;
     EditText emailForgetPassword;
     TextView forgotPassword;
     TextView signUpTextView;
@@ -68,7 +67,8 @@ public class SingIn extends AppCompatActivity {
             public void onClick(View view) {
                 URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signin");
                 if(validate()){
-                    connect();
+//                    connect();
+                    moveToUniversitiesActivity();
                 }
             }
         });
@@ -99,7 +99,7 @@ public class SingIn extends AppCompatActivity {
                         // User clicked OK button
                         URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/forgetpassword");
                         emailForgetPassword = (EditText) mview.findViewById(R.id.forget_password_code_editText);
-                        connectForgetPassword();
+//                        connectForgetPassword();
                     }
                 });
                 mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

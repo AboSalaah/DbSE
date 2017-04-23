@@ -26,15 +26,10 @@ public class AboutDbSE extends AppCompatActivity {
     String result=null;
     StringBuilder URL;
 
-    private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_db_se);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
 
@@ -42,7 +37,7 @@ public class AboutDbSE extends AppCompatActivity {
         URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/about");
         description = (TextView) findViewById(R.id.dbse_description);
         website = (TextView) findViewById(R.id.dbse_website);
-        connect();
+//        connect();
     }
 
     void connect()

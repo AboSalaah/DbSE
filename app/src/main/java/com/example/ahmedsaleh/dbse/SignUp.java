@@ -98,7 +98,8 @@ public class SignUp extends AppCompatActivity {
                         }
                         params.put("name",realname.getText().toString());
                         params.put("type","VISITOR");
-                        connectToPost();
+//                        connectToPost();
+                    moveToSignInActivity();
                 }
             }
         });
@@ -110,7 +111,8 @@ public class SignUp extends AppCompatActivity {
                     params.put("username",username.getText().toString());
                     params.put("email",email.getText().toString());
                     params.put("password",password.getText().toString());
-                    connectToPostVerify();
+//                    connectToPostVerify();
+                    verifyemail();
                 }
             }
         });
@@ -157,6 +159,12 @@ public class SignUp extends AppCompatActivity {
                     female.setVisibility(View.VISIBLE);
                     change.setVisibility(View.VISIBLE);
                 } else {
+                    nextbutton.setVisibility(View.INVISIBLE);
+                    createaccount.setVisibility(View.VISIBLE);
+                    realname.setVisibility(View.VISIBLE);
+                    male.setVisibility(View.VISIBLE);
+                    female.setVisibility(View.VISIBLE);
+                    change.setVisibility(View.VISIBLE);
                     Toast.makeText(SignUp.this, "Wrong Code", Toast.LENGTH_LONG).show();
                 }
             }
@@ -169,6 +177,11 @@ public class SignUp extends AppCompatActivity {
         mBuilder.setView(mview);
         AlertDialog dialog=mBuilder.create();
         dialog.show();
+    }
+
+    private void moveToSignInActivity(){
+        Intent i = new Intent(SignUp.this,SingIn.class);
+        startActivity(i);
     }
 
     boolean validateOtherData(){
@@ -251,7 +264,6 @@ public class SignUp extends AppCompatActivity {
                             String msg = json.get("msg").toString();
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
                             moveTaskToBack(true);
-                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
