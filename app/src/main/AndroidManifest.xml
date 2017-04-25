@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SingIn"
+            android:name=".Activities.SingIn"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".EditProfile" />
+        <activity android:name=".Activities.SignUp" />
+        <activity android:name=".Activities.EditProfile" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/title_activity_universities"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ViewProfile" />
-        <activity android:name=".AboutDbSE" />
-        <activity android:name=".University_Profile" />
+        <activity android:name=".Activities.ViewProfile" />
+        <activity android:name=".Activities.AboutDbSE" />
+        <activity android:name=".Activities.Item_Profile" />
     </application>
 
 </manifest>

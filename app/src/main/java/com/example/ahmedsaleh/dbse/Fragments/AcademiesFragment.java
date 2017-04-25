@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+
+import com.example.ahmedsaleh.dbse.Activities.SingIn;
+import com.example.ahmedsaleh.dbse.Adapters.Exp_list_Adapter;
+import com.example.ahmedsaleh.dbse.Helpers.ListItem;
+import com.example.ahmedsaleh.dbse.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,7 +98,7 @@ public class AcademiesFragment extends Fragment {
         myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
         url.setLength(0);
-        url.append(getString(R.string.url)+"academy"+"?token="+getString(R.string.token));
+        url.append(getString(R.string.url)+"academy"+"?token="+ SingIn.token);
         Log.i("tag","academiesurl  "+url.toString());
          connect();
 

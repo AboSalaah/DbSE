@@ -1,21 +1,16 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Activities;
 
-import android.preference.PreferenceManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+import com.example.ahmedsaleh.dbse.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

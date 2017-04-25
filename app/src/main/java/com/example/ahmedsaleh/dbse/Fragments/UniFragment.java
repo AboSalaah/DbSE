@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+
+import com.example.ahmedsaleh.dbse.Activities.SingIn;
+import com.example.ahmedsaleh.dbse.Adapters.Exp_list_Adapter;
+import com.example.ahmedsaleh.dbse.Helpers.ListItem;
+import com.example.ahmedsaleh.dbse.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,15 +34,15 @@ import okhttp3.Response;
  */
 
 /**
- * Fragment that shows Institues list and thier Dapartments using ExpandableListView and Exp_list_Adapter
+ * Fragment represent list of universities
  */
-public class InstitutesFragment extends Fragment {
-
-    private Exp_list_Adapter myAdapter;
+public class UniFragment extends Fragment {
+   private Exp_list_Adapter myAdapter;
     private ExpandableListView expandableListView;
     private String result=null;
     private StringBuilder url=new StringBuilder();
-    public InstitutesFragment() {
+    //String URL="http://516c8af0.ngrok.io/dbse/public/api/v1/university?token=";
+    public UniFragment() {
         // Required empty public constructor
     }
 
@@ -46,15 +51,16 @@ public class InstitutesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_institutes2, container, false);
+        View view= inflater.inflate(R.layout.fragment_uni2, container, false);
+        return view;
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         //this part will be deleted
-        expandableListView=(ExpandableListView)getView().findViewById(R.id.exp_listview_inst);
+        expandableListView=(ExpandableListView)getView().findViewById(R.id.exp_listview_uni);
        /* String header_items[]=getResources().getStringArray(R.array.Universities);
         String cairo[]=getResources().getStringArray(R.array.h1);
         String alex[]=getResources().getStringArray(R.array.h2);
@@ -84,27 +90,26 @@ public class InstitutesFragment extends Fragment {
         childs.put(headings.get(4),l5);
          myAdapter=new Exp_list_Adapter(getActivity(),headings,childs);
          */
-        ArrayList<ListItem> headers=new ArrayList<ListItem>();
+        ArrayList<ListItem>headers=new ArrayList<ListItem>();
         ArrayList<ListItem>childs=new ArrayList<ListItem>();
-        HashMap<ListItem,ArrayList<ListItem>> hashMap=new HashMap<>();
-        headers.add(new ListItem("T2feeel",1,"institute"));
-        childs.add(new ListItem("handasaT2feel",1,"institute"));
-        childs.add(new ListItem("tebT2feel",2,"institute"));
+        HashMap<ListItem,ArrayList<ListItem>>hashMap=new HashMap<>();
+        headers.add(new ListItem("T2feeel",1,"university"));
+        childs.add(new ListItem("handasaT2feel",1,"university"));
+        childs.add(new ListItem("tebT2feel",2,"university"));
         hashMap.put(headers.get(0),childs);
         myAdapter=new Exp_list_Adapter(getActivity(),new ArrayList<ListItem>(headers),new HashMap<ListItem,ArrayList<ListItem>>(hashMap));
         expandableListView.setAdapter(myAdapter);
         url.setLength(0);
-        url.append(getString(R.string.url)+"institute"+"?token="+getString(R.string.token));
-        Log.i("tag","instituteurl  "+url.toString());
+        url.append(getString(R.string.url)+"university"+"?token="+ SingIn.token);
+        Log.i("tag","universityurl  "+url.toString());
         connect();
-
-
     }
 
+
     /**
-     * Function to make the connection to get the desired acamdemies and update the UI
+     * Function to make the connection to get the desired unversities data and update the UI
+     * @returns void
      * @author Ahmed Saleh
-     * @return void
      */
     void connect()
     {
@@ -141,19 +146,38 @@ public class InstitutesFragment extends Fragment {
                                 JSONObject uni=universities.getJSONObject(i);
                                 String name=uni.getString("name");
                                 int id=uni.getInt("id");
-                                headers.add(new ListItem(name,id,"institute"));
-                                String departments=uni.getString("departments");
-                                String parts[]=departments.split("/");
-                                for(int j=0;j<parts.length;++j)
+                                if(uni.getString("logo").contains("storage"))
                                 {
+                                    Log.i("tag","d5ll hnaaaaaaaaaaaaaaaaaaaaaa");
+                                    String logo=getString(R.string.imageurl)+uni.getString("logo");
+                                    headers.add(new ListItem(name,logo,id,"university"));}
+                                else
+                                {
+                                    headers.add(new ListItem(name,id,"university"));
+                                }
+                                JSONArray faculties=uni.getJSONArray("faculties");
+                                for(int j=0;j<faculties.length();++j)
+                                {
+                                    JSONObject faculty=faculties.getJSONObject(j);
+                                    String facultyname=faculty.getString("name");
 
-                                    childs.add(new ListItem(parts[j],j,"instdep"));
+                                    int facultyid=faculty.getInt("id");
+                                    if(faculty.getString("logo").contains("storage"))
+                                    {
+
+                                        String facultylogo=getString(R.string.imageurl)+faculty.getString("logo");
+                                    childs.add(new ListItem(facultyname,facultylogo,facultyid,"faculty"));
+
+
+                                    }
+                                    else
+                                    {
+                                        childs.add(new ListItem(facultyname,facultyid,"faculty"));
+                                    }
                                 }
                                 hashMap.put(headers.get(i),new ArrayList<ListItem>(childs));
                                 childs.clear();
                             }
-
-
                             myAdapter.setAdapter(getActivity(),headers,hashMap);
 
                         } catch (JSONException e) {
@@ -174,3 +198,6 @@ public class InstitutesFragment extends Fragment {
 
 
 }
+
+
+

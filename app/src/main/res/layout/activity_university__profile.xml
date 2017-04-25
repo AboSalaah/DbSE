@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ahmedsaleh.dbse.University_Profile"
+    tools:context=".Activities.Item_Profile"
     android:orientation="vertical"
     android:background="@drawable/pic12"
     android:focusable="true"
@@ -169,22 +169,7 @@
         style="@style/item_attributes"
         />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/uni_profile_faculties_list_view_label"
-            style="@style/labels_profile_style"
-            />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/uni_profile_faculties_list_view"
-        android:padding="10dp"
-
-        >
-
-    </ListView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

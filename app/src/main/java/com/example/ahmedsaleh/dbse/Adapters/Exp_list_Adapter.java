@@ -1,22 +1,19 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ahmedsaleh.dbse.Activities.Item_Profile;
+import com.example.ahmedsaleh.dbse.Helpers.ListItem;
+import com.example.ahmedsaleh.dbse.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -105,7 +102,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
             @Override
             public void onClick(View v) {
                 Log.i(ctx.toString(),"ana d5ltt hnaaaaaaaa");
-                Intent intent = new Intent(ctx,University_Profile.class);
+                Intent intent = new Intent(ctx,Item_Profile.class);
                 intent.putExtra("type",header_title.getmType());
                 intent.putExtra("id",String.valueOf(header_title.getmItemId()));
                 intent.putExtra("url",ctx.getString(R.string.url));
@@ -141,7 +138,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ctx,University_Profile.class);
+                Intent intent = new Intent(ctx,Item_Profile.class);
 
                 intent.putExtra("type",child_title.getmType());
 
@@ -167,7 +164,7 @@ public class Exp_list_Adapter extends BaseExpandableListAdapter{
      * @return void
      */
 
-    void setAdapter(Context ctx, List<ListItem>header_titles, HashMap<ListItem, ArrayList<ListItem>> child_titles)
+    public void setAdapter(Context ctx, List<ListItem> header_titles, HashMap<ListItem, ArrayList<ListItem>> child_titles)
     {
         this.ctx=ctx; this.header_titles=header_titles; this.child_titles=child_titles;
         notifyDataSetChanged();

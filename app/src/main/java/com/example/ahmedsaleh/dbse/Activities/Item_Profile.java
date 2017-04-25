@@ -1,28 +1,21 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.ahmedsaleh.dbse.Adapters.ImageSliderAdapter;
+import com.example.ahmedsaleh.dbse.Helpers.QueryUtils;
+import com.example.ahmedsaleh.dbse.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -31,27 +24,26 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class University_Profile extends AppCompatActivity {
+public class Item_Profile extends AppCompatActivity {
     private StringBuilder parser=new StringBuilder();
     private String result;
     private String itemType;
     private StringBuilder url=new StringBuilder();
     private String itemId;
     private int nedeedpadding;
-    private Faculties_Custom_Adapter adapter;
-    private String tag="University_Profile";
+    private String tag="Item_Profile";
     private ImageSliderAdapter adapterView;
     private double lat;//for last latitude for location on map
     private double lon; //for last longatiude for laction on map
     private String location; //for last location
     private ListView listView;
+    private StringBuilder ImageUrl=new StringBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +53,15 @@ public class University_Profile extends AppCompatActivity {
         itemId=intent.getStringExtra("id");
         url.setLength(0);
         url.append(getString(R.string.url));
-        url.append(itemType+"/"+itemId+"?token="+getString(R.string.token));
-        Log.i("University_Profile","el typeeeee "+itemType);
-        Log.i("University_Profile","el id "+itemId);
+        url.append(itemType+"/"+itemId+"?token="+SingIn.token);
+        ImageUrl.append(getString(R.string.imageurl)+"storage/"+itemType+"/"+itemId);
+        Log.i("Item_Profile","el typeeeee "+itemType);
+        Log.i("Item_Profile","el id "+itemId);
         TextView locationonamp=(TextView)findViewById(R.id.uni_profile_location_on_map);
         locationonamp.setTextColor(Color.parseColor(getString(R.string.colorforfacultieslist)));
 
         // this part will be deleted
-        nedeedpadding=QueryUtils.getDppixels(this,5);
+        nedeedpadding= QueryUtils.getDppixels(this,5);
       /*  int imagesid[]={R.drawable.pic4,R.drawable.pic5};
         ViewPager mViewPager = (ViewPager) findViewById(R.id.image_view_pager);
         adapterView = new ImageSliderAdapter(this,imagesid);
@@ -159,53 +152,8 @@ public class University_Profile extends AppCompatActivity {
 
         //////////////////////////////////////////////////////////////////////////
         nedeedpadding=QueryUtils.getDppixels(getApplicationContext(),10);
-        ArrayList<List_view_faculty_item>arr=new ArrayList<>();
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
-        arr.add(new List_view_faculty_item("doc","2", "uni"));
-        arr.add(new List_view_faculty_item("e3l","3", "uni"));
-        arr.add(new List_view_faculty_item("ada","4", "uni"));
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
-        arr.add(new List_view_faculty_item("eng","1", "uni"));
 
-        adapter=new Faculties_Custom_Adapter(getApplicationContext(),arr);
-        listView=(ListView)findViewById(R.id.uni_profile_faculties_list_view);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                List_view_faculty_item list_view_faculty_item=(List_view_faculty_item)parent.getItemAtPosition(position);
-                Intent intent1=new Intent(University_Profile.this,University_Profile.class);
-                intent1.putExtra("type",list_view_faculty_item.getmType());
-                intent1.putExtra("id",list_view_faculty_item.getmId());
-                startActivity(intent1);
-
-            }
-        });
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        v.getParent().getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        v.getParent().getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-
-                // Handle ListView touch events.
-                v.onTouchEvent(event);
-                return true;
-            }
-        });
-        Log.i("University_Profile","aheeeeeeh  "+url.toString());
+        Log.i("Item_Profile","aheeeeeeh  "+url.toString());
         connect();
 
     }
@@ -228,7 +176,7 @@ public class University_Profile extends AppCompatActivity {
             public void onResponse(okhttp3.Call call, Response response) throws IOException
             {
                 result=response.body().string().toString();
-                Log.i("University_Profile","result  "+result);
+                Log.i("Item_Profile","result  "+result);
                   runOnUiThread(new Runnable() {
                     @Override
                     public void run()
@@ -563,7 +511,7 @@ public class University_Profile extends AppCompatActivity {
                                 otherslabel.setVisibility(View.GONE);
                             }
 
-                             TextView facultieslabel=(TextView)findViewById(R.id.uni_profile_faculties_list_view_label);
+                            /* TextView facultieslabel=(TextView)findViewById(R.id.uni_profile_faculties_list_view_label);
                             if(jsonObject.has("faculties")&&jsonObject.getJSONArray("faculties").length()!=0) {
                                 String type;
                                 if (itemType.equals("university")) type = "faculty";
@@ -590,6 +538,7 @@ public class University_Profile extends AppCompatActivity {
                                 facultieslabel.setVisibility(View.GONE);
                                 listView.setVisibility(View.GONE);
                             }
+                            */
 
 
                         } catch (JSONException e) {

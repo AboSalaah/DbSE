@@ -1,8 +1,12 @@
-package com.example.ahmedsaleh.dbse;
+package com.example.ahmedsaleh.dbse.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.ahmedsaleh.dbse.Fragments.AcademiesFragment;
+import com.example.ahmedsaleh.dbse.Fragments.InstitutesFragment;
+import com.example.ahmedsaleh.dbse.Fragments.UniFragment;
 
 /**
  * Created by Ahmed Saleh on 4/13/2017.
