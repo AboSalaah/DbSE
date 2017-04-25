@@ -60,9 +60,9 @@ public class SingIn extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signin");
+                URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
-//                    connect();
+                   connect();
                     moveToUniversitiesActivity();
                 }
             }
@@ -239,6 +239,7 @@ public class SingIn extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+
                             JSONObject json = new JSONObject(result);
                             String error = json.get("error").toString();
                             Toast.makeText(SingIn.this,error, Toast.LENGTH_LONG).show();
@@ -250,6 +251,7 @@ public class SingIn extends AppCompatActivity {
                                         .putString("token", json.getString("token")).commit();
                                 token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("token", "defaultStringIfNothingFound");
+
                                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
                                         .putString("id", json.getString("id")).commit();
                                 id = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getApplicationContext())

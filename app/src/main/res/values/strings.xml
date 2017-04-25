@@ -115,7 +115,7 @@
     <!-- Token-->
     <string name="token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvZGJzZVwvcHVibGljXC9hcGlcL3YxXC9zaWduaW4iLCJpYXQiOjE0OTI4ODIyNzUsImV4cCI6MTQ5Mjg4NTg3NSwibmJmIjoxNDkyODgyMjc1LCJqdGkiOiJ3aDFOV0FCSXV6WVRpcmp2In0.DfWKYNFHSuuhkYDNBS0D_YC4NnoZ72du9xAWZ0ugZg8</string>
 
-    <string name="url">http://25093b70.ngrok.io/dbse/public/api/v1/</string>
-    <string name="imageurl">http://25093b70.ngrok.io/dbse/public/</string>
+    <string name="url">http://e7f5836e.ngrok.io/dbse/public/api/v1/</string>
+    <string name="imageurl">http://e7f5836e.ngrok.io/dbse/public/</string>
     <string name="colorforfacultieslist">#1976D2</string>
 </resources>

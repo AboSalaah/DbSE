@@ -114,8 +114,7 @@ public class Item_Profile extends AppCompatActivity {
         textView8.setText("facebook.com/cufe");
         TextView textView9=(TextView)findViewById(R.id.uni_profile_facebookpage_label);
         textView9.setText("FacebookPage");
-        TextView textView10=(TextView)findViewById(R.id.uni_profile_faculties_list_view_label);
-        textView10.setText("Faculties");
+
 
         TextView textView11=(TextView)findViewById(R.id.uni_profile_location_on_map_label);
         textView11.setText("Location On Map");
@@ -319,7 +318,7 @@ public class Item_Profile extends AppCompatActivity {
                             TextView discription = (TextView) findViewById(R.id.uni_profile_discreption);
                             if(jsonObject1.has("description")&&!jsonObject1.getString("description").equals("null")) {
 
-                               discriptionlable.setText("Discreption");
+                               discriptionlable.setText("Description");
                                 String descreption = jsonObject1.getString("description");
                                discription.setText(descreption);
                             }
@@ -444,7 +443,7 @@ public class Item_Profile extends AppCompatActivity {
                                 TextView pastpresidentlable=(TextView)findViewById(R.id.uni_profile_past_presedent_label);
                             TextView pastpresidnet=(TextView)findViewById(R.id.uni_profile_past_presedent);
                             if(jsonObject1.has("past_presidents")&&!jsonObject1.getString("past_presidents").equals("null")) {
-                               pastpresidentlable.setText("Past_President");
+                               pastpresidentlable.setText("Past_Presidents");
 
                                 String past_presidents = jsonObject1.getString("past_presidents");
 
