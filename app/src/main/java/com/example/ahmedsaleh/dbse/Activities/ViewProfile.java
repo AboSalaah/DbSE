@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse.R;
 
@@ -33,7 +34,7 @@ public class ViewProfile extends AppCompatActivity {
         firstLetter = (TextView) findViewById(R.id.View_Profile_textincircle);
         URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SingIn.id)+"?token=");
         URL.append(SingIn.token);
-//        connect();
+        connect();
     }
 
     void connect()
@@ -48,6 +49,12 @@ public class ViewProfile extends AppCompatActivity {
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewProfile.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

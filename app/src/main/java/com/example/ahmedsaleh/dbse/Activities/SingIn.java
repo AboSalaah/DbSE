@@ -63,7 +63,6 @@ public class SingIn extends AppCompatActivity {
                 URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
                    connect();
-
                 }
             }
         });
@@ -94,7 +93,7 @@ public class SingIn extends AppCompatActivity {
                         // User clicked OK button
                         URL = new StringBuilder(getString(R.string.url)+"forgetpassword");
                         emailForgetPassword = (EditText) mview.findViewById(R.id.forget_password_code_editText);
-//                        connectForgetPassword();
+                        connectForgetPassword();
                     }
                 });
                 mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -181,9 +180,14 @@ public class SingIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SingIn.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -207,7 +211,6 @@ public class SingIn extends AppCompatActivity {
 
             }
         });
-//        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
     }
 
     void connect()
@@ -231,7 +234,7 @@ public class SingIn extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SingIn.this,"Connection Failed!", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -273,7 +276,6 @@ public class SingIn extends AppCompatActivity {
 
             }
         });
-//        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
     }
 
 

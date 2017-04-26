@@ -89,9 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if(id == R.id.Home_icon){
-                moveToUniveristies();
-        }
         if(id == R.id.Edit_profile){
             moveToEditProfileActiviy();
         }

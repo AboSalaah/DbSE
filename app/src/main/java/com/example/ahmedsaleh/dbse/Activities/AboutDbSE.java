@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse.R;
 
@@ -54,6 +55,12 @@ public class AboutDbSE extends AppCompatActivity {
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AboutDbSE.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -70,7 +77,7 @@ public class AboutDbSE extends AppCompatActivity {
                             description.setText(json.getString("description"));
                             website.setText(json.getString("website"));
                         } catch (JSONException e) {
-
+                            Toast.makeText(AboutDbSE.this,"Connection Failed!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
                     }

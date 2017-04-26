@@ -53,10 +53,6 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         URL = new StringBuilder(getString(R.string.url)+"signupverify");
         username =(EditText)findViewById(R.id.usernameedittext);
@@ -82,7 +78,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validateOtherData()){
-//                    Toast.makeText(SignUp.this, "Done", Toast.LENGTH_LONG).show();
+
                     URL = new StringBuilder(getString(R.string.url)+"signup");
                     params = new HashMap<String, String>();
                     params.put("username",username.getText().toString());
@@ -95,8 +91,7 @@ public class SignUp extends AppCompatActivity {
                         }
                         params.put("name",realname.getText().toString());
                         params.put("type","VISITOR");
-//                        connectToPost();
-                    moveToSignInActivity();
+                        connectToPost();
                 }
             }
         });
@@ -109,7 +104,6 @@ public class SignUp extends AppCompatActivity {
                     params.put("email",email.getText().toString());
                     params.put("password",password.getText().toString());
                     connectToPostVerify();
-                    verifyemail();
                 }
             }
         });
@@ -164,6 +158,7 @@ public class SignUp extends AppCompatActivity {
                     change.setVisibility(View.VISIBLE);
                     Toast.makeText(SignUp.this, "Wrong Code", Toast.LENGTH_LONG).show();
                 }
+                dialog.dismiss();
             }
         });
         mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -201,9 +196,14 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignUp.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -221,6 +221,7 @@ public class SignUp extends AppCompatActivity {
                             verifyemail();
 
                         } catch (JSONException e) {
+                            Toast.makeText(SignUp.this,"sending to this email failed!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 
@@ -243,9 +244,15 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignUp.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
 
             @Override
@@ -260,8 +267,10 @@ public class SignUp extends AppCompatActivity {
                             JSONObject json = new JSONObject(result);
                             String msg = json.get("msg").toString();
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
-                            moveTaskToBack(true);
+                            moveToSignInActivity();
+                            finish();
                         } catch (JSONException e) {
+                            Toast.makeText(SignUp.this, "Registeration Failed!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 

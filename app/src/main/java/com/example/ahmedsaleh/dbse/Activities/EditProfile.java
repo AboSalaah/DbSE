@@ -91,6 +91,12 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(EditProfile.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -149,9 +155,14 @@ public class EditProfile extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(EditProfile.this, "Connection Failed", Toast.LENGTH_LONG).show();
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(EditProfile.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -168,8 +179,6 @@ public class EditProfile extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             Toast.makeText(EditProfile.this, "Saved", Toast.LENGTH_LONG).show();
-                            moveToViewProfileActivity();
-                            finish();
                             e.printStackTrace();
                         }
 
@@ -178,9 +187,5 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
-    }
-    void moveToViewProfileActivity(){
-        Intent i = new Intent(EditProfile.this,ViewProfile.class);
-        startActivity(i);
     }
 }
