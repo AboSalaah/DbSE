@@ -67,15 +67,15 @@ public class EditProfile extends AppCompatActivity {
                 }
             }
         });
-        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
+        URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SingIn.id)+"?token=");
         Log.v("myyyyyyyyyyyyyyyy",String.valueOf(SingIn.id));
         URL.append(SingIn.token);
-//        connectToGet();
+        connectToGet();
         Button saveButton = (Button) findViewById(R.id.Save_changes_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                connectToPost();
+               connectToPost();
             }
         });
     }

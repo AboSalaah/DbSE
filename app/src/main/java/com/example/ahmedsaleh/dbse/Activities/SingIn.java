@@ -63,7 +63,7 @@ public class SingIn extends AppCompatActivity {
                 URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
                    connect();
-                    moveToUniversitiesActivity();
+
                 }
             }
         });
@@ -92,7 +92,7 @@ public class SingIn extends AppCompatActivity {
                 mBuilder.setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-                        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/forgetpassword");
+                        URL = new StringBuilder(getString(R.string.url)+"forgetpassword");
                         emailForgetPassword = (EditText) mview.findViewById(R.id.forget_password_code_editText);
 //                        connectForgetPassword();
                     }
@@ -228,7 +228,13 @@ public class SingIn extends AppCompatActivity {
             public void onFailure(okhttp3.Call call, IOException e) {
                 Log.v("responsehhhhhhhhh", call.request().body().toString());
                 e.printStackTrace();
-//                Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
 
             @Override

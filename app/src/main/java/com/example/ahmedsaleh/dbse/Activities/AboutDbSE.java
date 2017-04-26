@@ -36,10 +36,10 @@ public class AboutDbSE extends AppCompatActivity {
 
 
 
-        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/about");
+        URL = new StringBuilder(getString(R.string.url)+"about");
         description = (TextView) findViewById(R.id.dbse_description);
         website = (TextView) findViewById(R.id.dbse_website);
-//        connect();
+        connect();
     }
 
     void connect()

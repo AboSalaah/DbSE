@@ -31,7 +31,7 @@ public class ViewProfile extends AppCompatActivity {
 
 
         firstLetter = (TextView) findViewById(R.id.View_Profile_textincircle);
-        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/visitor/"+String.valueOf(SingIn.id)+"?token=");
+        URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SingIn.id)+"?token=");
         URL.append(SingIn.token);
 //        connect();
     }

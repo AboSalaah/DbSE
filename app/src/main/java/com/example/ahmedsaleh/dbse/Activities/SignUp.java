@@ -58,7 +58,7 @@ public class SignUp extends AppCompatActivity {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signupverify");
+        URL = new StringBuilder(getString(R.string.url)+"signupverify");
         username =(EditText)findViewById(R.id.usernameedittext);
         email =(EditText)findViewById(R.id.emailedittext);
         password =(EditText)findViewById(R.id.passwordedittext);
@@ -83,7 +83,7 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 if(validateOtherData()){
 //                    Toast.makeText(SignUp.this, "Done", Toast.LENGTH_LONG).show();
-                    URL = new StringBuilder("http://a1a2b2dd.ngrok.io/dbse/public/api/v1/signup");
+                    URL = new StringBuilder(getString(R.string.url)+"signup");
                     params = new HashMap<String, String>();
                     params.put("username",username.getText().toString());
                     params.put("email",email.getText().toString());
@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity {
                     params.put("username",username.getText().toString());
                     params.put("email",email.getText().toString());
                     params.put("password",password.getText().toString());
-//                    connectToPostVerify();
+                    connectToPostVerify();
                     verifyemail();
                 }
             }
